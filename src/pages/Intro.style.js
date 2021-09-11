@@ -19,7 +19,7 @@ export const MiddleWrapper = styled(Wrapper)`
   z-index: 3;
 `;
 
-export const IntroWrapper = styled(FlexBox)`
+export const IntroContainer = styled(FlexBox)`
   max-width: 100%;
   padding: 0 40px;
   position: relative;

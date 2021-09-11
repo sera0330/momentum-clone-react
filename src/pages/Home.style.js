@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.div`
+export const HomeContainer = styled.div`
   z-index: 3;
   display: flex;
   flex-direction: column;
@@ -12,7 +12,6 @@ export const Wrapper = styled.div`
 `;
 
 export const Header = styled.div`
-  height: 60px;
   display: flex;
   justify-content: space-between;
 `;
@@ -34,28 +33,27 @@ export const Center = styled.div`
   position: relative;
 `;
 
+export const FocusContainer = styled.div`
+  position: relative;
+  vertical-align: top;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 100%;
+  padding: 0 40px;
+  top: -8px;
+`;
+
+export const H3 = styled.h3`
+  margin: 17px 0 3px;
+  font-size: 100%;
+  line-height: 120%;
+  text-transform: uppercase;
+  color: #fff;
+`;
+
 export const Footer = styled.div`
   height: 60px;
   display: flex;
   justify-content: space-between;
-`;
-
-export const FocusOuterWrapper = styled.div`
-  width: 100%;
-`;
-
-export const FocusContainer = styled.div`
-  width: 100%;
-  position: relative;
-  vertical-align: top;
-`;
-
-export const FocusWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
-export const Prompt = styled.div`
-  padding-bottom: 0.5em;
-  max-width: 87.5%;
 `;

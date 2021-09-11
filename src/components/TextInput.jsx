@@ -5,6 +5,7 @@ const StyledTextInput = styled.input.attrs(props => ({
   type: "text",
 }))`
   width: 100%;
+  padding-top: 4px;
   border: 0;
   border-bottom: 2px solid #fff;
   background-color: transparent;
