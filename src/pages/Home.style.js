@@ -13,12 +13,14 @@ export const HomeContainer = styled.div`
 
 export const Header = styled.div`
   display: flex;
-  justify-content: space-between;
+  // justify-content: space-between;
+  justify-content: flex-end;
 `;
 
 export const Between = styled.div`
   flex: 1 1 50%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -50,6 +52,11 @@ export const H3 = styled.h3`
   line-height: 120%;
   text-transform: uppercase;
   color: #fff;
+  cursor: default;
+  user-select: none; /* supported by Chrome and Opera */
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
 `;
 
 export const Footer = styled.div`

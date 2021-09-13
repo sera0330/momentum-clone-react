@@ -19,10 +19,10 @@ const Intro = ({ setUser }) => {
 
   return (
     <S.Wrapper>
-      <Background url="https://images.unsplash.com/photo-1548588627-f978862b85e1?ixlib=rb-1.2.1&q=99&fm=jpg&crop=entropy&cs=tinysrgb&w=2048&fit=max&ixid=eyJhcHBfaWQiOjcwOTV9?momo_cache_bg_uuid=3eb794f9-8a0e-4476-9947-834ead4dc5ee" />
+      <Background url="https://farm5.staticflickr.com/4301/36165186121_2e32e53810_k.jpg?momo_cache_bg_uuid=fc79dc0a-fba1-4472-96c3-eeaac1f5a228" />
       <S.MiddleWrapper>
         <S.IntroContainer>
-          <Span size="300%" weight="400" text="Hello, what's your name?" />
+          <Span size="300%" weight="500" text="Hello, what's your name?" />
           <TextInput size="270%" onKeyPress={handleKeyPress} />
         </S.IntroContainer>
       </S.MiddleWrapper>

@@ -1,42 +1,69 @@
 import React, { useState } from "react";
+import { LS_USER, LS_FOCUS } from "../constants/localStorage";
+import { randomBackgroundURL } from "../constants/url";
+import * as S from "./Home.style";
 import Background from "../components/Background";
 import Span from "../components/Span";
 import TextInput from "../components/TextInput";
 import Clock from "../components/Clock";
-import * as S from "./Home.style";
 import Weather from "../components/Weather";
-import { LS_FOCUS } from "../constants/localStorage";
 import Focus from "../components/Focus";
 
-const Home = ({ user }) => {
+const Home = ({ user, setUser }) => {
   const [focus, setFocus] = useState(localStorage.getItem(LS_FOCUS));
 
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
-      setFocus(event.target.value);
-      localStorage.setItem(LS_FOCUS, focus);
+      initFocus(event.target.value);
     }
+  };
+
+  const initFocus = (input) => {
+    setFocus(input);
+    localStorage.setItem(LS_FOCUS, input);
+  };
+
+  const handleGreetingClick = (event) => {
+    if (window.confirm("Do you want to logout?")) {
+      logout();
+    }
+  };
+
+  const logout = () => {
+    clearFocus();
+    setUser(null);
+    localStorage.removeItem(LS_USER);
+  };
+
+  const clearFocus = () => {
+    setFocus(null);
+    localStorage.removeItem(LS_FOCUS);
   };
 
   return (
     <>
-      <Background url="https://images.unsplash.com/photo-1533015235343-2aec29bcb285?ixlib=rb-1.2.1&q=99&fm=jpg&crop=entropy&cs=tinysrgb&w=2048&fit=max&ixid=eyJhcHBfaWQiOjcwOTV9?momo_cache_bg_uuid=e7ca9d83-f174-4426-994d-975273f3ad3f" />
+      <Background url={randomBackgroundURL} />
       <S.HomeContainer>
         <S.Header>
-          <div>left</div>
           <Weather />
         </S.Header>
         <S.Between />
         <S.Center>
           <Clock />
-          <Span size="300%" weight="500" text={`Hello, ` + user + `.`} />
+          <div onClick={handleGreetingClick}>
+            <Span size="300%" weight="500" text={`Hello, ` + user + `.`} />
+          </div>
         </S.Center>
         <S.Between>
           {focus ? (
-            <div>
+            <>
               <S.H3>TODAY</S.H3>
-              <Focus focus={focus} setFocus={setFocus} />
-            </div>
+              <Focus
+                focus={focus}
+                setFocus={setFocus}
+                clearFocus={clearFocus}
+              />
+            </>
           ) : (
             <S.FocusContainer>
               <Span

@@ -10,7 +10,11 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      {user ? <Home user={user} /> : <Intro setUser={setUser} />}
+      {user ? (
+        <Home user={user} setUser={setUser} />
+      ) : (
+        <Intro setUser={setUser} />
+      )}
     </>
   );
 }
