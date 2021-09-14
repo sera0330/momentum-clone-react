@@ -35,7 +35,7 @@ export const Center = styled.div`
   position: relative;
 `;
 
-export const FocusContainer = styled.div`
+export const FocusInputContainer = styled.div`
   position: relative;
   vertical-align: top;
   display: flex;

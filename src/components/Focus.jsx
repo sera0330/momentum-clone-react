@@ -1,115 +1,131 @@
-import React, { useRef, useState } from "react";
-import styled from "styled-components";
-import Span from "./Span";
+import React, { useRef, useState, useEffect } from "react";
+import * as S from "./Focus.style";
 import { CgClose, CgMathPlus, CgMoreAlt } from "react-icons/cg";
 import { IoMdCheckboxOutline, IoMdSquareOutline } from "react-icons/io";
 import { RiPencilFill } from "react-icons/ri";
-import { LS_FOCUS_CHECKED } from "../constants/localStorage";
-
-const StyledFocus = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
-const OpacitySpan = styled.span`
-  color: #fff;
-  opacity: 0.75;
-  font-size: 130%;
-  line-height: 1.2;
-  margin: 0 10px;
-  display: ${(props) => props.display || "none"};
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-
-  ${StyledFocus}:hover & {
-    display: flex;
-  }
-`;
-
-const SideDiv = styled.div`
-  justify-content: center;
-  flex: 1 0 50px;
-  display: inline-flex;
-  align-items: center;
-`;
-
-const More = styled.div`
-  position: relative;
-  display: flex;
-`;
-
-const MoreIconWrapper = styled.div`
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
-
-const Dropdown = styled.div`
-  display: ${(props) => props.display || "none"};
-  position: absolute;
-  top: 100%;
-  z-index: 100;
-  text-align: left;
-  background: #fff;
-  border-radius: 5px;
-  box-shadow: 0 1px 8px rgb(0 0 0 / 25%);
-`;
+import {
+  LS_FOCUS_CHECKED,
+  CHECKED_TRUE,
+  CHECKED_FALSE,
+} from "../constants/localStorage";
 
 const Focus = ({ focus, setFocus, clearFocus }) => {
-  const [checked, setChecked] = useState();
-  const moreClicked = useRef(false);
+  const LABEL_NEW = "New";
+  const LABEL_EDIT = "Edit";
+  const LABEL_CLEAR = "Clear";
+  const DISPLAY_FLEX = "flex";
+  const DISPLAY_NONE = "none";
+
+  const [checked, setChecked] = useState(
+    localStorage.getItem(LS_FOCUS_CHECKED) ? true : false
+  );
+  const [moreClicked, setMoreClicked] = useState();
+  const moreContainerRef = useRef();
+
+  useEffect(() => {
+    localStorage.setItem(
+      LS_FOCUS_CHECKED,
+      checked ? CHECKED_TRUE : CHECKED_FALSE
+    );
+  }, [checked]);
 
   const handleClickCheckbox = () => {
     setChecked(!checked);
   };
 
-  const handleClickClose = () => {
-    if (window.confirm("Do you want to delete?")) {
-      clearFocus();
-    }
+  const handleClickMore = () => {
+    setMoreClicked(!moreClicked);
   };
 
-  const handleClickMore = () => {};
+  const handleClickClear = () => {
+    clearFocus();
+  };
+
+  const handleClickEdit = () => {
+    setFocus(null);
+  };
+
+  const closeDropdown = () => {
+    setMoreClicked(false);
+  };
+
+  // more 버튼 외부 클릭 시 드롭다운 닫기
+  // refer) https://pythonq.com/so/javascript/5581
+  const useOutsideAlerter = (ref) => {
+    useEffect(() => {
+      function handleClickOutside(event) {
+        if (ref.current && !ref.current.contains(event.target)) {
+          closeDropdown();
+        }
+      }
+
+      // Bind the event listener
+      document.addEventListener("mousedown", handleClickOutside);
+
+      return () => {
+        // Unbind the event listener on clean up
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [ref]);
+  };
+
+  useOutsideAlerter(moreContainerRef);
 
   return (
-    <>
-      <StyledFocus>
-        <SideDiv>
-          <OpacitySpan
-            onClick={handleClickCheckbox}
-            display={checked ? "flex" : "none"}
-          >
-            {checked ? <IoMdCheckboxOutline /> : <IoMdSquareOutline />}
-          </OpacitySpan>
-        </SideDiv>
-        <Span size="170%" weight="400" text={focus} />
-        <SideDiv>
-          <More>
-            <MoreIconWrapper>
-              <OpacitySpan>
-                <CgMoreAlt onClick={handleClickMore} />
-              </OpacitySpan>
-            </MoreIconWrapper>
-            <Dropdown display="">
-              <ul>
-                <li>
-                  <OpacitySpan>
-                    {checked ? <CgMathPlus /> : <RiPencilFill />}
-                  </OpacitySpan>
-                </li>
-                <li>
-                  <OpacitySpan>
-                    <CgClose onClick={handleClickClose} />
-                  </OpacitySpan>
-                </li>
-              </ul>
-            </Dropdown>
-          </More>
-        </SideDiv>
-      </StyledFocus>
-    </>
+    <S.StyledFocus>
+      <S.SideDiv>
+        <S.OpacitySpan
+          onClick={handleClickCheckbox}
+          display={checked ? DISPLAY_FLEX : DISPLAY_NONE}
+        >
+          {checked ? <IoMdCheckboxOutline /> : <IoMdSquareOutline />}
+        </S.OpacitySpan>
+      </S.SideDiv>
+      <S.FocusText size="170%" weight="400" checked={checked}>
+        {focus}
+      </S.FocusText>
+      <S.SideDiv>
+        <S.MoreContainer ref={moreContainerRef}>
+          <S.MoreIconWrapper>
+            <S.OpacitySpan
+              onClick={handleClickMore}
+              display={moreClicked ? DISPLAY_FLEX : DISPLAY_NONE}
+            >
+              <CgMoreAlt />
+            </S.OpacitySpan>
+          </S.MoreIconWrapper>
+          <S.Dropdown display={moreClicked ? DISPLAY_FLEX : DISPLAY_NONE}>
+            <S.Ul>
+              <S.Li>
+                {checked ? (
+                  <S.ItemContainer onClick={handleClickClear}>
+                    <S.ItemIconWrapper>
+                      <CgMathPlus />
+                    </S.ItemIconWrapper>
+                    <span>{LABEL_NEW}</span>
+                  </S.ItemContainer>
+                ) : (
+                  <S.ItemContainer onClick={handleClickEdit}>
+                    <S.ItemIconWrapper>
+                      <RiPencilFill />
+                    </S.ItemIconWrapper>
+                    <span>{LABEL_EDIT}</span>
+                  </S.ItemContainer>
+                )}
+              </S.Li>
+              <S.Li>
+                <S.ItemContainer onClick={handleClickClear}>
+                  <S.ItemIconWrapper>
+                    <CgClose />
+                  </S.ItemIconWrapper>
+                  <span>{LABEL_CLEAR}</span>
+                </S.ItemContainer>
+              </S.Li>
+            </S.Ul>
+          </S.Dropdown>
+        </S.MoreContainer>
+      </S.SideDiv>
+    </S.StyledFocus>
   );
 };
 
