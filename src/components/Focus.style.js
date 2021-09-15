@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const StyledFocus = styled.div`
   display: flex;
   justify-content: center;
+  width: 100%;
 `;
 
 export const FocusText = styled.span`
@@ -36,10 +37,11 @@ export const OpacitySpan = styled.span`
 `;
 
 export const SideDiv = styled.div`
-  justify-content: center;
   flex: 1 0 50px;
   display: inline-flex;
   align-items: center;
+  justify-content: ${(props) =>
+    props.side === "left" ? "flex-end" : "flex-start"};
 `;
 
 export const MoreContainer = styled.div`

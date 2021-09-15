@@ -1,11 +1,4 @@
 import React, { useState, useEffect } from "react";
-import {
-  LS_USER,
-  LS_FOCUS,
-  LS_FOCUS_CHECKED,
-  CHECKED_FALSE,
-} from "../constants/localStorage";
-import { randomBackgroundURL } from "../constants/url";
 import * as S from "./Home.style";
 import Background from "../components/Background";
 import Span from "../components/Span";
@@ -13,7 +6,13 @@ import TextInput from "../components/TextInput";
 import Clock from "../components/Clock";
 import Weather from "../components/Weather";
 import Focus from "../components/Focus";
-import { askFocus, askLogout } from "../constants/messages";
+import {
+  LS_FOCUS,
+  LS_FOCUS_CHECKED,
+  CHECKED_FALSE,
+} from "../constants/localStorage";
+import { randomBackgroundURL } from "../constants/url";
+import { askFocus, askLogout } from "../constants/message";
 
 const Home = ({ user, setUser }) => {
   const [focus, setFocus] = useState(localStorage.getItem(LS_FOCUS));
@@ -41,13 +40,14 @@ const Home = ({ user, setUser }) => {
 
   const logout = () => {
     clearFocus();
-    setUser(null);
-    localStorage.removeItem(LS_USER);
+    setUser("");
+    localStorage.clear();
   };
 
   const clearFocus = () => {
-    setFocus(null);
+    setFocus("");
     localStorage.removeItem(LS_FOCUS);
+    localStorage.removeItem(LS_FOCUS_CHECKED);
   };
 
   return (
@@ -66,14 +66,14 @@ const Home = ({ user, setUser }) => {
         </S.Center>
         <S.Between>
           {focus ? (
-            <S.FocusInputContainer>
-              <S.H3>TODAY</S.H3>
+            <S.FocusContainer>
+              <S.FocusTitle>TODAY</S.FocusTitle>
               <Focus
                 focus={focus}
                 setFocus={setFocus}
                 clearFocus={clearFocus}
               />
-            </S.FocusInputContainer>
+            </S.FocusContainer>
           ) : (
             <S.FocusInputContainer>
               <Span size="170%" weight="400" text={askFocus} />

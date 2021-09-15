@@ -1,9 +1,9 @@
 import React from "react";
+import * as S from "./Intro.style";
 import Span from "../components/Span";
 import TextInput from "../components/TextInput";
 import Background from "../components/Background";
-import { LS_USER } from "../constants/localStorage";
-import * as S from "./Intro.style";
+import { LS_FOCUS, LS_USER } from "../constants/localStorage";
 
 const Intro = ({ setUser }) => {
   const handleKeyPress = (event) => {
@@ -15,6 +15,7 @@ const Intro = ({ setUser }) => {
   const registerUser = (user) => {
     setUser(user);
     localStorage.setItem(LS_USER, user);
+    localStorage.setItem(LS_FOCUS, "");
   };
 
   return (

@@ -46,7 +46,11 @@ export const FocusInputContainer = styled.div`
   top: -8px;
 `;
 
-export const H3 = styled.h3`
+export const FocusContainer = styled(FocusInputContainer)`
+  width: 100%;
+`;
+
+export const FocusTitle = styled.h3`
   margin: 17px 0 3px;
   font-size: 100%;
   line-height: 120%;

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Span from "./Span";
-import styled from "styled-components";
 
 const Clock = () => {
   const [date, setDate] = useState("");

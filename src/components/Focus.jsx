@@ -1,13 +1,13 @@
 import React, { useRef, useState, useEffect } from "react";
 import * as S from "./Focus.style";
-import { CgClose, CgMathPlus, CgMoreAlt } from "react-icons/cg";
-import { IoMdCheckboxOutline, IoMdSquareOutline } from "react-icons/io";
-import { RiPencilFill } from "react-icons/ri";
 import {
   LS_FOCUS_CHECKED,
   CHECKED_TRUE,
   CHECKED_FALSE,
 } from "../constants/localStorage";
+import { CgClose, CgMathPlus, CgMoreAlt } from "react-icons/cg";
+import { IoMdCheckboxOutline, IoMdSquareOutline } from "react-icons/io";
+import { RiPencilFill } from "react-icons/ri";
 
 const Focus = ({ focus, setFocus, clearFocus }) => {
   const LABEL_NEW = "New";
@@ -17,11 +17,13 @@ const Focus = ({ focus, setFocus, clearFocus }) => {
   const DISPLAY_NONE = "none";
 
   const [checked, setChecked] = useState(
+    // focus 체크박스 체크 여부
     localStorage.getItem(LS_FOCUS_CHECKED) ? true : false
   );
-  const [moreClicked, setMoreClicked] = useState();
-  const moreContainerRef = useRef();
+  const [moreClicked, setMoreClicked] = useState(); // focus 우측의 more 버튼 클릭 여부. 클릭했을 때 dropdown 보이기 위함
+  const moreContainerRef = useRef(); // more 버튼 영역 컨테이너
 
+  // focus가 체크됐을 때는 hover 상태가 아니어도 체크박스가 보이도록
   useEffect(() => {
     localStorage.setItem(
       LS_FOCUS_CHECKED,
@@ -42,7 +44,7 @@ const Focus = ({ focus, setFocus, clearFocus }) => {
   };
 
   const handleClickEdit = () => {
-    setFocus(null);
+    setFocus("");
   };
 
   const closeDropdown = () => {
@@ -73,7 +75,7 @@ const Focus = ({ focus, setFocus, clearFocus }) => {
 
   return (
     <S.StyledFocus>
-      <S.SideDiv>
+      <S.SideDiv side="left">
         <S.OpacitySpan
           onClick={handleClickCheckbox}
           display={checked ? DISPLAY_FLEX : DISPLAY_NONE}
@@ -84,7 +86,7 @@ const Focus = ({ focus, setFocus, clearFocus }) => {
       <S.FocusText size="170%" weight="400" checked={checked}>
         {focus}
       </S.FocusText>
-      <S.SideDiv>
+      <S.SideDiv side="right">
         <S.MoreContainer ref={moreContainerRef}>
           <S.MoreIconWrapper>
             <S.OpacitySpan

@@ -8,22 +8,22 @@ const Weather = () => {
   const [description, setDescription] = useState("");
   const [location, setLocation] = useState("");
 
-  function getWeather(lat, lon) {
-    fetch(
-      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_WEATHER}&units=metric`
-    )
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (json) {
-        setTemperature(`${Math.floor(json.main.temp)}°C`);
-        setDescription(json.weather[0].description);
-        setLocation(json.name);
-      });
-  }
+  useEffect(() => {
+    const coords = localStorage.getItem(LS_COORDS);
 
-  function saveCoords(coordsObj) {
-    localStorage.setItem(LS_COORDS, JSON.stringify(coordsObj));
+    if (coords === null) {
+      askForCoords();
+    } else {
+      const parseCoords = JSON.parse(coords);
+      const latitude = parseCoords.latitude;
+      const longitude = parseCoords.longitude;
+
+      getWeather(latitude, longitude);
+    }
+  }, []);
+
+  function askForCoords() {
+    navigator.geolocation.getCurrentPosition(handelGeoSuccess, handelGeoError);
   }
 
   function handelGeoSuccess(position) {
@@ -42,37 +42,23 @@ const Weather = () => {
     console.log("Can't get current position");
   }
 
-  function askForCoords() {
-    navigator.geolocation.getCurrentPosition(handelGeoSuccess, handelGeoError);
+  function saveCoords(coordsObj) {
+    localStorage.setItem(LS_COORDS, JSON.stringify(coordsObj));
   }
 
-  function loadCoords() {
-    const loadedCoords = localStorage.getItem(LS_COORDS);
-
-    if (loadedCoords === null) {
-      askForCoords();
-    } else {
-      const parseCoords = JSON.parse(loadedCoords);
-      const latitude = parseCoords.latitude;
-      const longitude = parseCoords.longitude;
-
-      getWeather(latitude, longitude);
-    }
+  function getWeather(lat, lon) {
+    fetch(
+      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_WEATHER}&units=metric`
+    )
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (json) {
+        setTemperature(`${Math.floor(json.main.temp)}°C`);
+        setDescription(json.weather[0].description);
+        setLocation(json.name);
+      });
   }
-
-  useEffect(() => {
-    const loadedCoords = localStorage.getItem(LS_COORDS);
-
-    if (loadedCoords === null) {
-      askForCoords();
-    } else {
-      const parseCoords = JSON.parse(loadedCoords);
-      const latitude = parseCoords.latitude;
-      const longitude = parseCoords.longitude;
-
-      getWeather(latitude, longitude);
-    }
-  }, []);
 
   return (
     <WeatherContainer>
