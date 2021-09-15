@@ -13,9 +13,25 @@ import {
 } from "../constants/localStorage";
 import { randomBackgroundURL } from "../constants/url";
 import { askFocus, askLogout } from "../constants/message";
+import Todo from "../components/Todo";
 
 const Home = ({ user, setUser }) => {
   const [focus, setFocus] = useState(localStorage.getItem(LS_FOCUS));
+  const [quote, setQoute] = useState({
+    content: "",
+    author: "",
+  });
+
+  useEffect(() => {
+    fetch("https://api.quotable.io/random?maxLength=50")
+      .then((response) => response.json())
+      .then((data) => {
+        setQoute({
+          content: `${data.content}`,
+          author: `${data.author}`,
+        });
+      });
+  }, []);
 
   useEffect(() => {
     localStorage.setItem(LS_FOCUS, focus);
@@ -86,9 +102,16 @@ const Home = ({ user, setUser }) => {
           )}
         </S.Between>
         <S.Footer>
-          <div>left</div>
-          <div>center</div>
-          <div>right</div>
+          <S.BottomLeft></S.BottomLeft>
+          <S.Bottom>
+            <S.Quote>
+              <S.QuoteContent>"{quote.content}"</S.QuoteContent>
+              <S.QuoteAuthor>{quote.author}</S.QuoteAuthor>
+            </S.Quote>
+          </S.Bottom>
+          <S.BottomRight>
+            <Todo />
+          </S.BottomRight>
         </S.Footer>
       </S.HomeContainer>
     </>
