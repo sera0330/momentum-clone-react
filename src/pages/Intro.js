@@ -20,7 +20,7 @@ const Intro = ({ setUser }) => {
 
   return (
     <S.Wrapper>
-      <Background url="https://farm5.staticflickr.com/4301/36165186121_2e32e53810_k.jpg?momo_cache_bg_uuid=fc79dc0a-fba1-4472-96c3-eeaac1f5a228" />
+      <Background url="https://images.unsplash.com/photo-1631031651060-424d82e511de?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2600&q=80" />
       <S.MiddleWrapper>
         <S.IntroContainer>
           <Span size="300%" weight="500" text="Hello, what's your name?" />
