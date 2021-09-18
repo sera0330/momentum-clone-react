@@ -165,4 +165,6 @@ export const TodoTitle = styled.span`
   word-wrap: break-word;
   flex: 1 1 auto;
   min-width: 0;
+  text-decoration: ${(props) => (props.checked ? "line-through" : "none")};
+  opacity: ${(props) => (props.checked ? "0.5" : "1")};
 `;

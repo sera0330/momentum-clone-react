@@ -9,13 +9,13 @@ import { CgClose, CgMathPlus, CgMoreAlt } from "react-icons/cg";
 import { IoMdCheckboxOutline, IoMdSquareOutline } from "react-icons/io";
 import { RiPencilFill } from "react-icons/ri";
 
-const Focus = ({ focus, setFocus, clearFocus }) => {
-  const LABEL_NEW = "New";
-  const LABEL_EDIT = "Edit";
-  const LABEL_CLEAR = "Clear";
-  const DISPLAY_FLEX = "flex";
-  const DISPLAY_NONE = "none";
+const LABEL_NEW = "New";
+const LABEL_EDIT = "Edit";
+const LABEL_CLEAR = "Clear";
+const DISPLAY_FLEX = "flex";
+const DISPLAY_NONE = "none";
 
+const Focus = ({ focus, setFocus, clearFocus }) => {
   const [checked, setChecked] = useState(
     // focus 체크박스 체크 여부
     localStorage.getItem(LS_FOCUS_CHECKED) ? true : false
