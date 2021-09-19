@@ -47,8 +47,8 @@ export const TodoTitle = styled.span.attrs((props) =>
   word-wrap: break-word;
   flex: 1 1 auto;
   min-width: 0;
-  text-decoration: ${(props) => (props.checked ? "line-through" : "none")};
-  opacity: ${(props) => (props.checked ? "0.5" : "1")};
+  text-decoration: ${(props) => (props.isChecked ? "line-through" : "none")};
+  opacity: ${(props) => (props.isChecked || props.editable ? "0.5" : "1")};
 `;
 
 export const TodoControl = styled.div`

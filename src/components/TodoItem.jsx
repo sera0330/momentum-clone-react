@@ -23,22 +23,27 @@ const TodoItem = ({ todoItem, itemIndex, todoList, setTodoList }) => {
         index === editableIndex ? { ...todo, editable: true } : todo
       )
     );
-
-    todoTitleRef.current.focus();
   };
 
   const handleEnterEdit = (event, editedIndex) => {
     if (event.key === KEY_ENTER) {
       event.preventDefault();
-
-      setTodoList(
-        todoList.map((todo, index) =>
-          index === editedIndex
-            ? { ...todo, value: event.target.innerHTML, editable: false }
-            : todo
-        )
-      );
+      updateTodo(event, editedIndex);
     }
+  };
+
+  const handleBlurEdit = (event, editedIndex) => {
+    updateTodo(event, editedIndex);
+  };
+
+  const updateTodo = (event, editedIndex) => {
+    setTodoList(
+      todoList.map((todo, index) =>
+        index === editedIndex
+          ? { ...todo, value: event.target.innerHTML, editable: false }
+          : todo
+      )
+    );
   };
 
   const handelClickDelete = (clickedIndex) => {
@@ -57,9 +62,10 @@ const TodoItem = ({ todoItem, itemIndex, todoList, setTodoList }) => {
         </S.TodoCheckboxWrapper>
       </S.TodoLabel>
       <S.TodoTitle
-        checked={todoItem.checked}
-        onKeyPress={(event) => handleEnterEdit(event, itemIndex)}
+        isChecked={todoItem.checked}
         editable={todoItem.editable}
+        onKeyPress={(event) => handleEnterEdit(event, itemIndex)}
+        onBlur={(event) => handleBlurEdit(event, itemIndex)}
         ref={todoTitleRef}
       >
         {todoItem.value}
