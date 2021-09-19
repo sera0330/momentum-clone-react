@@ -6,6 +6,7 @@ import TextInput from "../components/TextInput";
 import Clock from "../components/Clock";
 import Weather from "../components/Weather";
 import Focus from "../components/Focus";
+import Todo from "../components/Todo";
 import {
   LS_FOCUS,
   LS_FOCUS_CHECKED,
@@ -13,7 +14,6 @@ import {
 } from "../constants/localStorage";
 import { randomBackgroundURL } from "../constants/url";
 import { askFocus, askLogout } from "../constants/message";
-import Todo from "../components/Todo";
 
 const Home = ({ user, setUser }) => {
   const [focus, setFocus] = useState(localStorage.getItem(LS_FOCUS));

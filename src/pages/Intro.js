@@ -4,10 +4,11 @@ import Span from "../components/Span";
 import TextInput from "../components/TextInput";
 import Background from "../components/Background";
 import { LS_FOCUS, LS_USER } from "../constants/localStorage";
+import { KEY_ENTER } from "../constants/keyboard";
 
 const Intro = ({ setUser }) => {
   const handleKeyPress = (event) => {
-    if (event.key === "Enter") {
+    if (event.key === KEY_ENTER) {
       registerUser(event.target.value);
     }
   };

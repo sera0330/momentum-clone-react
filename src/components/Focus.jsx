@@ -5,6 +5,7 @@ import {
   CHECKED_TRUE,
   CHECKED_FALSE,
 } from "../constants/localStorage";
+import { DISPLAY_FLEX, DISPLAY_NONE } from "../constants/css";
 import { CgClose, CgMathPlus, CgMoreAlt } from "react-icons/cg";
 import { IoMdCheckboxOutline, IoMdSquareOutline } from "react-icons/io";
 import { RiPencilFill } from "react-icons/ri";
@@ -12,8 +13,6 @@ import { RiPencilFill } from "react-icons/ri";
 const LABEL_NEW = "New";
 const LABEL_EDIT = "Edit";
 const LABEL_CLEAR = "Clear";
-const DISPLAY_FLEX = "flex";
-const DISPLAY_NONE = "none";
 
 const Focus = ({ focus, setFocus, clearFocus }) => {
   const [checked, setChecked] = useState(

@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
 import * as S from "./Todo.style";
+import TodoItem from "./TodoItem";
+import { DISPLAY_BLOCK, DISPLAY_NONE } from "../constants/css";
 import { LS_TODO_LIST } from "../constants/localStorage";
-import { IoMdCheckboxOutline, IoMdSquareOutline } from "react-icons/io";
-import { CgClose } from "react-icons/cg";
-import { RiPencilFill } from "react-icons/ri";
-
-const DISPLAY_BLOCK = "block";
-const DISPLAY_NONE = "none";
+import { KEY_ENTER } from "../constants/keyboard";
 
 const Todo = () => {
   const [todoToggle, setTodoToggle] = useState(false);
@@ -22,8 +19,8 @@ const Todo = () => {
     setTodoToggle(!todoToggle);
   };
 
-  const handlePressEnter = (event) => {
-    if (event.key === "Enter") {
+  const handleEnterAdd = (event) => {
+    if (event.key === KEY_ENTER) {
       addNewTodo(event.target.value);
       event.target.value = ""; // clear input
     }
@@ -33,25 +30,10 @@ const Todo = () => {
     const todoObj = {
       value: todo,
       checked: false,
+      editable: false,
     };
 
     setTodoList([...todoList, todoObj]);
-  };
-
-  const handleCheckTodo = (changedIndex) => {
-    setTodoList(
-      todoList.map((todo, index) =>
-        index === changedIndex ? { ...todo, checked: !todo.checked } : todo
-      )
-    );
-  };
-
-  const handelClickEdit = () => {
-    // edit 모드로 전환
-  };
-
-  const handelClickDelete = (clickedIndex) => {
-    setTodoList(todoList.filter((todo, index) => index !== clickedIndex));
   };
 
   return (
@@ -66,35 +48,17 @@ const Todo = () => {
           <S.Ol>
             {todoList.map((todo, index) => (
               <S.Li key={index}>
-                <S.TodoItem>
-                  <S.TodoLabel>
-                    <S.TodoCheckboxWrapper>
-                      <S.TodoCheckbox
-                        defaultChecked={todo.checked}
-                        onChange={() => handleCheckTodo(index)}
-                      />
-                      {todo.checked ? (
-                        <IoMdCheckboxOutline />
-                      ) : (
-                        <IoMdSquareOutline />
-                      )}
-                    </S.TodoCheckboxWrapper>
-                  </S.TodoLabel>
-                  <S.TodoTitle checked={todo.checked}>{todo.value}</S.TodoTitle>
-                  <S.TodoControl>
-                    <S.IconWrapper onClick={handelClickEdit}>
-                      <RiPencilFill />
-                    </S.IconWrapper>
-                    <S.IconWrapper onClick={() => handelClickDelete(index)}>
-                      <CgClose />
-                    </S.IconWrapper>
-                  </S.TodoControl>
-                </S.TodoItem>
+                <TodoItem
+                  todoItem={todo}
+                  itemIndex={index}
+                  todoList={todoList}
+                  setTodoList={setTodoList}
+                />
               </S.Li>
             ))}
           </S.Ol>
           <S.TodoFooter>
-            <S.TodoInput onKeyPress={handlePressEnter} />
+            <S.TodoInput onKeyPress={handleEnterAdd} />
           </S.TodoFooter>
         </S.Dropdown>
       </S.DropdownWrapper>
