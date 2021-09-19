@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import * as S from "./Todo.style";
 import { LS_TODO_LIST } from "../constants/localStorage";
+import { IoMdCheckboxOutline, IoMdSquareOutline } from "react-icons/io";
+import { CgClose } from "react-icons/cg";
+import { RiPencilFill } from "react-icons/ri";
 
 const DISPLAY_BLOCK = "block";
 const DISPLAY_NONE = "none";
@@ -43,6 +46,14 @@ const Todo = () => {
     );
   };
 
+  const handelClickEdit = () => {
+    // edit 모드로 전환
+  };
+
+  const handelClickDelete = (clickedIndex) => {
+    setTodoList(todoList.filter((todo, index) => index !== clickedIndex));
+  };
+
   return (
     <S.TodoContainer>
       <S.DropdownWrapper display={todoToggle ? DISPLAY_BLOCK : DISPLAY_NONE}>
@@ -57,12 +68,27 @@ const Todo = () => {
               <S.Li key={index}>
                 <S.TodoItem>
                   <S.TodoLabel>
-                    <S.TodoCheckbox
-                      defaultChecked={todo.checked}
-                      onChange={() => handleCheckTodo(index)}
-                    />
+                    <S.TodoCheckboxWrapper>
+                      <S.TodoCheckbox
+                        defaultChecked={todo.checked}
+                        onChange={() => handleCheckTodo(index)}
+                      />
+                      {todo.checked ? (
+                        <IoMdCheckboxOutline />
+                      ) : (
+                        <IoMdSquareOutline />
+                      )}
+                    </S.TodoCheckboxWrapper>
                   </S.TodoLabel>
                   <S.TodoTitle checked={todo.checked}>{todo.value}</S.TodoTitle>
+                  <S.TodoControl>
+                    <S.IconWrapper onClick={handelClickEdit}>
+                      <RiPencilFill />
+                    </S.IconWrapper>
+                    <S.IconWrapper onClick={() => handelClickDelete(index)}>
+                      <CgClose />
+                    </S.IconWrapper>
+                  </S.TodoControl>
                 </S.TodoItem>
               </S.Li>
             ))}
