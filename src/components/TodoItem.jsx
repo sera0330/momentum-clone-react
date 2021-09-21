@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import * as S from "./TodoItem.style";
-import { KEY_ENTER } from "../constants/keyboard";
+import { KEY_ENTER } from "../constants/etc";
 import { IoMdCheckboxOutline, IoMdSquareOutline } from "react-icons/io";
 import { CgClose } from "react-icons/cg";
 import { RiPencilFill } from "react-icons/ri";

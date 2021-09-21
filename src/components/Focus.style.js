@@ -1,6 +1,31 @@
 import styled from "styled-components";
 
-export const StyledFocus = styled.div`
+export const FocusContainer = styled.div`
+  position: relative;
+  vertical-align: top;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 100%;
+  padding: 0 40px;
+  top: -8px;
+  width: 100%;
+`;
+
+export const FocusTitle = styled.h3`
+  margin: 17px 0 3px;
+  font-size: 100%;
+  line-height: 120%;
+  text-transform: uppercase;
+  color: #fff;
+  cursor: default;
+  user-select: none; /* supported by Chrome and Opera */
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+`;
+
+export const FocusContent = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
@@ -31,7 +56,7 @@ export const OpacitySpan = styled.span`
   align-items: center;
   cursor: pointer;
 
-  ${StyledFocus}:hover & {
+  ${FocusContent}:hover & {
     display: flex;
   }
 `;

@@ -3,7 +3,7 @@ import * as S from "./Todo.style";
 import TodoItem from "./TodoItem";
 import { DISPLAY_BLOCK, DISPLAY_NONE } from "../constants/css";
 import { LS_TODO_LIST } from "../constants/localStorage";
-import { KEY_ENTER } from "../constants/keyboard";
+import { KEY_ENTER } from "../constants/etc";
 
 const Todo = () => {
   const [todoToggle, setTodoToggle] = useState(false);

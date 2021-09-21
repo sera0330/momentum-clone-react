@@ -18,7 +18,7 @@ const Clock = () => {
     }, 1000);
   }, []);
 
-  return <Span size="850%" weight="500" text={clock} />;
+  return <Span size="1050%" weight="500" text={clock} />;
 };
 
 export default Clock;

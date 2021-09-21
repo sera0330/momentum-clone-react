@@ -1,18 +1,15 @@
 import React, { useRef, useState, useEffect } from "react";
 import * as S from "./Focus.style";
+import FocusDropdownItem from "./FocusDropdownItem";
+import { ROLE_ADD, ROLE_CLEAR, ROLE_EDIT } from "../constants/etc";
 import {
   LS_FOCUS_CHECKED,
   CHECKED_TRUE,
   CHECKED_FALSE,
 } from "../constants/localStorage";
 import { DISPLAY_FLEX, DISPLAY_NONE } from "../constants/css";
-import { CgClose, CgMathPlus, CgMoreAlt } from "react-icons/cg";
+import { CgMoreAlt } from "react-icons/cg";
 import { IoMdCheckboxOutline, IoMdSquareOutline } from "react-icons/io";
-import { RiPencilFill } from "react-icons/ri";
-
-const LABEL_NEW = "New";
-const LABEL_EDIT = "Edit";
-const LABEL_CLEAR = "Clear";
 
 const Focus = ({ focus, setFocus, clearFocus }) => {
   const [checked, setChecked] = useState(
@@ -36,14 +33,6 @@ const Focus = ({ focus, setFocus, clearFocus }) => {
 
   const handleClickMore = () => {
     setMoreClicked(!moreClicked);
-  };
-
-  const handleClickClear = () => {
-    clearFocus();
-  };
-
-  const handleClickEdit = () => {
-    setFocus("");
   };
 
   const closeDropdown = () => {
@@ -73,60 +62,60 @@ const Focus = ({ focus, setFocus, clearFocus }) => {
   useOutsideAlerter(moreContainerRef);
 
   return (
-    <S.StyledFocus>
-      <S.SideDiv side="left">
-        <S.OpacitySpan
-          onClick={handleClickCheckbox}
-          display={checked ? DISPLAY_FLEX : DISPLAY_NONE}
-        >
-          {checked ? <IoMdCheckboxOutline /> : <IoMdSquareOutline />}
-        </S.OpacitySpan>
-      </S.SideDiv>
-      <S.FocusText size="170%" weight="400" checked={checked}>
-        {focus}
-      </S.FocusText>
-      <S.SideDiv side="right">
-        <S.MoreContainer ref={moreContainerRef}>
-          <S.MoreIconWrapper>
-            <S.OpacitySpan
-              onClick={handleClickMore}
-              display={moreClicked ? DISPLAY_FLEX : DISPLAY_NONE}
-            >
-              <CgMoreAlt />
-            </S.OpacitySpan>
-          </S.MoreIconWrapper>
-          <S.Dropdown display={moreClicked ? DISPLAY_FLEX : DISPLAY_NONE}>
-            <S.Ul>
-              <S.Li>
-                {checked ? (
-                  <S.ItemContainer onClick={handleClickClear}>
-                    <S.ItemIconWrapper>
-                      <CgMathPlus />
-                    </S.ItemIconWrapper>
-                    <span>{LABEL_NEW}</span>
-                  </S.ItemContainer>
-                ) : (
-                  <S.ItemContainer onClick={handleClickEdit}>
-                    <S.ItemIconWrapper>
-                      <RiPencilFill />
-                    </S.ItemIconWrapper>
-                    <span>{LABEL_EDIT}</span>
-                  </S.ItemContainer>
-                )}
-              </S.Li>
-              <S.Li>
-                <S.ItemContainer onClick={handleClickClear}>
-                  <S.ItemIconWrapper>
-                    <CgClose />
-                  </S.ItemIconWrapper>
-                  <span>{LABEL_CLEAR}</span>
-                </S.ItemContainer>
-              </S.Li>
-            </S.Ul>
-          </S.Dropdown>
-        </S.MoreContainer>
-      </S.SideDiv>
-    </S.StyledFocus>
+    <S.FocusContainer>
+      <S.FocusTitle>TODAY</S.FocusTitle>
+      <S.FocusContent>
+        <S.SideDiv side="left">
+          <S.OpacitySpan
+            onClick={handleClickCheckbox}
+            display={checked ? DISPLAY_FLEX : DISPLAY_NONE}
+          >
+            {checked ? <IoMdCheckboxOutline /> : <IoMdSquareOutline />}
+          </S.OpacitySpan>
+        </S.SideDiv>
+        <S.FocusText size="170%" weight="400" checked={checked}>
+          {focus}
+        </S.FocusText>
+        <S.SideDiv side="right">
+          <S.MoreContainer ref={moreContainerRef}>
+            <S.MoreIconWrapper>
+              <S.OpacitySpan
+                onClick={handleClickMore}
+                display={moreClicked ? DISPLAY_FLEX : DISPLAY_NONE}
+              >
+                <CgMoreAlt />
+              </S.OpacitySpan>
+            </S.MoreIconWrapper>
+            <S.Dropdown display={moreClicked ? DISPLAY_FLEX : DISPLAY_NONE}>
+              <S.Ul>
+                <S.Li>
+                  {checked ? (
+                    <FocusDropdownItem
+                      role={ROLE_ADD}
+                      setFocus={setFocus}
+                      clearFocus={clearFocus}
+                    />
+                  ) : (
+                    <FocusDropdownItem
+                      role={ROLE_EDIT}
+                      setFocus={setFocus}
+                      clearFocus={clearFocus}
+                    />
+                  )}
+                </S.Li>
+                <S.Li>
+                  <FocusDropdownItem
+                    role={ROLE_CLEAR}
+                    setFocus={setFocus}
+                    clearFocus={clearFocus}
+                  />
+                </S.Li>
+              </S.Ul>
+            </S.Dropdown>
+          </S.MoreContainer>
+        </S.SideDiv>
+      </S.FocusContent>
+    </S.FocusContainer>
   );
 };
 

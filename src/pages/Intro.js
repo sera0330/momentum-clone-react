@@ -4,7 +4,7 @@ import Span from "../components/Span";
 import TextInput from "../components/TextInput";
 import Background from "../components/Background";
 import { LS_FOCUS, LS_USER } from "../constants/localStorage";
-import { KEY_ENTER } from "../constants/keyboard";
+import { KEY_ENTER } from "../constants/etc";
 
 const Intro = ({ setUser }) => {
   const handleKeyPress = (event) => {
