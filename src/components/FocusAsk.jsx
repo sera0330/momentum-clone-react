@@ -1,24 +1,13 @@
 import React from "react";
-import styled from "styled-components";
+import * as S from "./Focus.style";
 import Span from "./Span";
 import TextInput from "./TextInput";
-import { askFocus } from "../constants/message";
+import { MSG_ASK_FOCUS } from "../constants/message";
 import {
   LS_FOCUS,
   LS_FOCUS_CHECKED,
   CHECKED_FALSE,
 } from "../constants/localStorage";
-
-const StyledFocusAsk = styled.div`
-  position: relative;
-  vertical-align: top;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 100%;
-  padding: 0 40px;
-  top: -8px;
-`;
 
 const FocusAsk = ({ setFocus }) => {
   const handleEnterKeyPress = (event) => {
@@ -33,14 +22,14 @@ const FocusAsk = ({ setFocus }) => {
   };
 
   return (
-    <StyledFocusAsk>
-      <Span size="2.1875em" weight="400" text={askFocus} />
+    <S.FocusAsk>
+      <Span size="2.1875em" weight="400" text={MSG_ASK_FOCUS} />
       <TextInput
         size="2.25em"
         defaultValue={localStorage.getItem(LS_FOCUS)}
         onKeyPress={handleEnterKeyPress}
       />
-    </StyledFocusAsk>
+    </S.FocusAsk>
   );
 };
 

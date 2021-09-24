@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+import * as S from "./Weather.style";
 import { API_WEATHER } from "../constants/apiKey";
 import { LS_COORDS } from "../constants/localStorage";
 
@@ -61,42 +61,12 @@ const Weather = () => {
   }
 
   return (
-    <WeatherContainer>
-      <Temperature>{temperature}</Temperature>
-      <Description>{description}</Description>
-      <Location>{location}</Location>
-    </WeatherContainer>
+    <S.WeatherContainer>
+      <S.Temperature>{temperature}</S.Temperature>
+      <S.Description>{description}</S.Description>
+      <S.Location>{location}</S.Location>
+    </S.WeatherContainer>
   );
 };
-
-const WeatherContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  color: #fff;
-  padding: 11px 20px 10px 10px;
-  text-align: right;
-  cursor: default;
-  user-select: none; /* supported by Chrome and Opera */
-  -webkit-user-select: none; /* Safari */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* Internet Explorer/Edge */
-`;
-
-const Temperature = styled.span`
-  font-size: 1.625rem;
-  font-weight: 400;
-`;
-
-const Description = styled.span`
-  opacity: 0.85;
-  font-size: 0.8125rem;
-  line-height: 1.2;
-`;
-
-const Location = styled.span`
-  opacity: 0.85;
-  font-size: 0.8125rem;
-  line-height: 1.2;
-`;
 
 export default Weather;

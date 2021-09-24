@@ -5,6 +5,7 @@ import TextInput from "../components/TextInput";
 import Background from "../components/Background";
 import { LS_FOCUS, LS_USER } from "../constants/localStorage";
 import { KEY_ENTER } from "../constants/etc";
+import { MSG_ASK_NAME } from "../constants/message";
 
 const Intro = ({ setUser }) => {
   const handleKeyPress = (event) => {
@@ -24,7 +25,7 @@ const Intro = ({ setUser }) => {
       <Background url="https://images.unsplash.com/photo-1631031651060-424d82e511de?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2600&q=80" />
       <S.MiddleWrapper>
         <S.IntroContainer>
-          <Span size="300%" weight="500" text="Hello, what's your name?" />
+          <Span size="300%" weight="500" text={MSG_ASK_NAME} />
           <TextInput size="270%" onKeyPress={handleKeyPress} />
         </S.IntroContainer>
       </S.MiddleWrapper>

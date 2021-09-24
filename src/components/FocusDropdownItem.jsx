@@ -1,28 +1,12 @@
 import React from "react";
-import styled from "styled-components";
+import * as S from "./Focus.style";
 import { ROLE_ADD, ROLE_CLEAR, ROLE_EDIT } from "../constants/etc";
-import { CgClose, CgMathPlus, CgMoreAlt } from "react-icons/cg";
+import { CgClose, CgMathPlus } from "react-icons/cg";
 import { RiPencilFill } from "react-icons/ri";
 
 const LABEL_NEW = "New";
 const LABEL_EDIT = "Edit";
 const LABEL_CLEAR = "Clear";
-
-const ItemContainer = styled.div`
-  width: max-content;
-  display: flex;
-  align-items: center;
-`;
-
-const ItemIconWrapper = styled.div`
-  width: 15px;
-  margin-left: -1px;
-  margin-right: 8px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0.7;
-`;
 
 const FocusDropdownItem = ({ role, setFocus, clearFocus }) => {
   const handleClickClear = () => {
@@ -47,12 +31,12 @@ const FocusDropdownItem = ({ role, setFocus, clearFocus }) => {
   }
 
   return (
-    <ItemContainer
+    <S.ItemContainer
       onClick={role === ROLE_EDIT ? handleClickEdit : handleClickClear}
     >
-      <ItemIconWrapper>{icon}</ItemIconWrapper>
+      <S.ItemIconWrapper>{icon}</S.ItemIconWrapper>
       <span>{label}</span>
-    </ItemContainer>
+    </S.ItemContainer>
   );
 };
 

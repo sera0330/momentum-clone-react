@@ -130,6 +130,19 @@ export const Li = styled.li`
   }
 `;
 
+// FocusAsk
+export const FocusAsk = styled.div`
+  position: relative;
+  vertical-align: top;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 100%;
+  padding: 0 40px;
+  top: -8px;
+`;
+
+// FocusDropdownItem
 export const ItemContainer = styled.div`
   width: max-content;
   display: flex;
