@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { ThemeProvider } from "styled-components";
+import { lightMode, darkMode } from "../styles/theme";
 import * as S from "./Home.style";
 import Background from "../components/Background";
 import Weather from "../components/Weather";
@@ -8,11 +10,18 @@ import FocusAsk from "../components/FocusAsk";
 import Focus from "../components/Focus";
 import Quote from "../components/Quote";
 import Todo from "../components/Todo";
-import { LS_FOCUS, LS_FOCUS_CHECKED } from "../constants/localStorage";
-import { randomBackgroundURL } from "../constants/url";
+import ThemeToggle from "../components/ThemeToggle";
+import {
+  LS_FOCUS,
+  LS_FOCUS_CHECKED,
+  LS_THEME,
+} from "../constants/localStorage";
+import { URL_RANDOM_BACKGROUND } from "../constants/url";
+import { THEME_LIGHT } from "../constants/etc";
 
 const Home = ({ user, setUser }) => {
   const [focus, setFocus] = useState(localStorage.getItem(LS_FOCUS));
+  const [theme, setTheme] = useState(localStorage.getItem(LS_THEME));
 
   useEffect(() => {
     localStorage.setItem(LS_FOCUS, focus);
@@ -25,8 +34,8 @@ const Home = ({ user, setUser }) => {
   };
 
   return (
-    <>
-      <Background url={randomBackgroundURL} />
+    <ThemeProvider theme={theme === THEME_LIGHT ? lightMode : darkMode}>
+      <Background url={URL_RANDOM_BACKGROUND} />
       <S.HomeContainer>
         <S.Header>
           <Weather />
@@ -44,7 +53,9 @@ const Home = ({ user, setUser }) => {
           )}
         </S.Between>
         <S.Footer>
-          <S.BottomLeft></S.BottomLeft>
+          <S.BottomLeft>
+            <ThemeToggle theme={theme} setTheme={setTheme} />
+          </S.BottomLeft>
           <S.Bottom>
             <Quote />
           </S.Bottom>
@@ -53,7 +64,7 @@ const Home = ({ user, setUser }) => {
           </S.BottomRight>
         </S.Footer>
       </S.HomeContainer>
-    </>
+    </ThemeProvider>
   );
 };
 

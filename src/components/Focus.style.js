@@ -17,7 +17,7 @@ export const FocusTitle = styled.h3`
   font-size: 100%;
   line-height: 120%;
   text-transform: uppercase;
-  color: #fff;
+  color: ${(props) => props.theme.fontColor};
   cursor: default;
   user-select: none; /* supported by Chrome and Opera */
   -webkit-user-select: none; /* Safari */
@@ -32,7 +32,7 @@ export const FocusContent = styled.div`
 `;
 
 export const FocusText = styled.span`
-  color: #fff;
+  color: ${(props) => props.theme.fontColor};
   text-shadow: 0 1px 5px rgb(0 0 0 / 10%);
   font-size: ${(props) => props.size};
   font-weight: ${(props) => props.weight};
@@ -46,7 +46,7 @@ export const FocusText = styled.span`
 `;
 
 export const OpacitySpan = styled.span`
-  color: #fff;
+  color: ${(props) => props.theme.fontColor};
   opacity: 0.75;
   font-size: 130%;
   line-height: 1.2;
@@ -87,7 +87,7 @@ export const Dropdown = styled.div`
   top: 100%;
   z-index: 100;
   text-align: left;
-  background: #fff;
+  background: ${(props) => props.theme.appBackground};
   border-radius: 5px;
   box-shadow: 0 1px 8px rgb(0 0 0 / 25%);
   transition: transform 0.25s ease, height 0.25s ease;
@@ -100,7 +100,8 @@ export const Dropdown = styled.div`
     transform: translateX(-50%);
     z-index: 1;
     border: 5px solid;
-    border-color: transparent transparent #fff transparent;
+    border-color: transparent transparent
+      ${(props) => props.theme.appBackground} transparent;
   }
 `;
 
@@ -111,7 +112,7 @@ export const Ul = styled.ul`
   position: relative;
   z-index: 0;
   transition: transform 0.25s ease, height 0.25s ease;
-  color: #222;
+  color: ${(props) => props.theme.appFontColor};
 `;
 
 export const Li = styled.li`
@@ -126,7 +127,7 @@ export const Li = styled.li`
   cursor: pointer;
 
   &:hover {
-    background: #ededed;
+    background: ${(props) => props.theme.appBackgroundHover};
   }
 `;
 

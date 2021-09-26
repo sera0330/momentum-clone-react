@@ -3,8 +3,8 @@ import * as S from "./Intro.style";
 import Span from "../components/Span";
 import TextInput from "../components/TextInput";
 import Background from "../components/Background";
-import { LS_FOCUS, LS_USER } from "../constants/localStorage";
-import { KEY_ENTER } from "../constants/etc";
+import { LS_FOCUS, LS_USER, LS_THEME } from "../constants/localStorage";
+import { KEY_ENTER, THEME_LIGHT } from "../constants/etc";
 import { MSG_ASK_NAME } from "../constants/message";
 
 const Intro = ({ setUser }) => {
@@ -18,6 +18,7 @@ const Intro = ({ setUser }) => {
     setUser(user);
     localStorage.setItem(LS_USER, user);
     localStorage.setItem(LS_FOCUS, "");
+    localStorage.setItem(LS_THEME, THEME_LIGHT);
   };
 
   return (

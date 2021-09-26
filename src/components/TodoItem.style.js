@@ -4,9 +4,10 @@ export const TodoItem = styled.span`
   padding: 6px 0;
   display: flex;
   align-items: center;
+  color: ${(props) => props.theme.appFontColor};
 
   &:hover {
-    background: #ededed;
+    background: ${(props) => props.theme.appBackgroundHover};
   }
 `;
 

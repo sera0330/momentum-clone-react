@@ -1,10 +1,6 @@
 import styled from "styled-components";
 
 export const TodoContainer = styled.div`
-  // display: flex;
-  // justify-content: flex-end;
-  // width: 100%;
-
   display: inline-block;
   position: relative;
   text-align: right;
@@ -54,7 +50,7 @@ export const Dropdown = styled.div`
   min-width: 200px;
   z-index: 2;
 
-  background: #fff;
+  background: ${(props) => props.theme.appBackground};
   border-radius: 5px;
   box-shadow: 0 1px 8px rgb(0 0 0 / 25%);
   transition: transform 0.25s ease, height 0.25s ease;
@@ -66,7 +62,8 @@ export const Dropdown = styled.div`
     right: 25px;
     z-index: 1;
     border: 8px solid;
-    border-color: #fff transparent transparent transparent;
+    border-color: ${(props) => props.theme.appBackground} transparent
+      transparent transparent;
   }
 `;
 
@@ -75,6 +72,7 @@ export const TodoHeader = styled.div`
   margin-bottom: 0;
   display: flex;
   align-items: center;
+  color: ${(props) => props.theme.appFontColor};
 `;
 
 export const HeaderTitleWrapper = styled.div`
@@ -114,6 +112,7 @@ export const TodoInput = styled.input.attrs((props) => ({
   border-radius: 0;
   outline: 0;
   background: 0 0;
+  color: ${(props) => props.theme.appFontColor};
 `;
 
 export const Ol = styled.ol`

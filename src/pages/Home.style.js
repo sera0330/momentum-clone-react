@@ -43,8 +43,8 @@ export const Footer = styled.div`
 
 export const BottomLeft = styled.div`
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
+  align-items: center;
+  justify-content: flex-start;
   flex: 0 0 188px;
 `;
 
