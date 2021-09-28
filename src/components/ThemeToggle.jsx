@@ -19,7 +19,7 @@ const Theme = ({ theme, setTheme }) => {
 
   return (
     <S.ToggleWrapper onClick={handleClickToggle}>
-      <S.Icon>
+      <S.Icon title={theme}>
         {theme === THEME_LIGHT ? <FaToggleOn /> : <FaToggleOff />}
       </S.Icon>
     </S.ToggleWrapper>

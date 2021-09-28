@@ -71,10 +71,13 @@ const TodoItem = ({ todoItem, itemIndex, todoList, setTodoList }) => {
         {todoItem.value}
       </S.TodoTitle>
       <S.TodoControl>
-        <S.IconWrapper onClick={() => handelClickEdit(itemIndex)}>
+        <S.IconWrapper onClick={() => handelClickEdit(itemIndex)} title="Edit">
           <RiPencilFill />
         </S.IconWrapper>
-        <S.IconWrapper onClick={() => handelClickDelete(itemIndex)}>
+        <S.IconWrapper
+          onClick={() => handelClickDelete(itemIndex)}
+          title="Delete"
+        >
           <CgClose />
         </S.IconWrapper>
       </S.TodoControl>

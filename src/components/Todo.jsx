@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import * as S from "./Todo.style";
 import TodoItem from "./TodoItem";
-import { DISPLAY_BLOCK, DISPLAY_NONE } from "../constants/css";
 import { LS_TODO_LIST } from "../constants/localStorage";
 import { KEY_ENTER } from "../constants/etc";
 
 const Todo = () => {
-  const [todoToggle, setTodoToggle] = useState(false);
+  const [visible, setVisible] = useState(false);
 
   const savedTodoList = JSON.parse(localStorage.getItem(LS_TODO_LIST));
   const [todoList, setTodoList] = useState(savedTodoList || []);
@@ -16,7 +15,7 @@ const Todo = () => {
   }, [todoList]);
 
   const handleClickTodoToggle = () => {
-    setTodoToggle(!todoToggle);
+    setVisible(!visible);
   };
 
   const handleEnterAdd = (event) => {
@@ -38,8 +37,8 @@ const Todo = () => {
 
   return (
     <S.TodoContainer>
-      <S.DropdownWrapper display={todoToggle ? DISPLAY_BLOCK : DISPLAY_NONE}>
-        <S.Dropdown>
+      <S.DropdownWrapper>
+        <S.Dropdown visible={visible}>
           <S.TodoHeader>
             <S.HeaderTitleWrapper>
               <S.HeaderTitle>Today</S.HeaderTitle>

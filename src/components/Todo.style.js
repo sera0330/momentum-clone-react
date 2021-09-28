@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const TodoContainer = styled.div`
   display: inline-block;
@@ -7,8 +7,8 @@ export const TodoContainer = styled.div`
 `;
 
 export const TodoToggle = styled.span`
-  padding: 0 15px;
   display: inline-block;
+  padding: 0 15px;
   color: rgba(255, 255, 255, 0.85);
   font-size: 1rem;
   font-weight: 500;
@@ -27,33 +27,35 @@ export const TodoToggle = styled.span`
 `;
 
 export const DropdownWrapper = styled.div`
-  display: ${(props) => props.display};
-  opacity: 1;
-  transform: none;
+  display: block;
   position: relative;
 `;
 
 export const Dropdown = styled.div`
   display: block;
-  height: auto;
-  width: 320px;
   position: absolute;
-  opacity: 1;
-  // overflow-y: hidden;
+  width: 320px;
   text-align: left;
-  transition: all 0.2s ease-out;
-  transition-property: opacity, height;
   bottom: 0;
   right: 7px;
   max-height: 100vh;
   max-width: 100vw;
   min-width: 200px;
-  z-index: 2;
-
   background: ${(props) => props.theme.appBackground};
   border-radius: 5px;
   box-shadow: 0 1px 8px rgb(0 0 0 / 25%);
-  transition: transform 0.25s ease, height 0.25s ease;
+  visibility: hidden;
+  opacity: 0;
+  transition-duration: 250ms;
+  transition-property: visibility, opacity;
+  transition-timing-function: ease-out;
+
+  ${(props) =>
+    props.visible &&
+    css`
+      visibility: visible;
+      opacity: 0.9;
+    `}
 
   :before {
     content: "";

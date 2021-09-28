@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const FocusContainer = styled.div`
   position: relative;
@@ -82,15 +82,26 @@ export const MoreIconWrapper = styled.div`
 `;
 
 export const Dropdown = styled.div`
-  display: ${(props) => props.display};
+  display: flex;
   position: absolute;
   top: 100%;
-  z-index: 100;
+  z-index: 2;
   text-align: left;
   background: ${(props) => props.theme.appBackground};
   border-radius: 5px;
   box-shadow: 0 1px 8px rgb(0 0 0 / 25%);
-  transition: transform 0.25s ease, height 0.25s ease;
+  visibility: hidden;
+  opacity: 0;
+  transition-duration: 250ms;
+  transition-property: visibility, opacity;
+  transition-timing-function: ease;
+
+  ${(props) =>
+    props.visible &&
+    css`
+      visibility: visible;
+      opacity: 0.9;
+    `}
 
   :before {
     content: "";
@@ -106,12 +117,11 @@ export const Dropdown = styled.div`
 `;
 
 export const Ul = styled.ul`
+  position: relative;
   list-style: none;
   margin: 0;
   padding: 6px 0;
-  position: relative;
   z-index: 0;
-  transition: transform 0.25s ease, height 0.25s ease;
   color: ${(props) => props.theme.appFontColor};
 `;
 

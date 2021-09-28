@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const Quote = styled.div`
   position: relative;
@@ -12,9 +12,31 @@ export const Quote = styled.div`
   flex: 1 0 100%;
   text-align: center;
   box-sizing: content-box;
-  -webkit-user-select: text;
-  -moz-user-select: text;
-  user-select: text;
+  cursor: default;
+  user-select: none; /* supported by Chrome and Opera */
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+`;
+
+export const QuoteCopied = styled.span`
+  display: block;
+  position: relative;
+  margin-bottom: 5px;
+  font-size: 0.5rem;
+  color: white;
+  line-height: 1;
+  visibility: hidden;
+  opacity: 0;
+  transition-duration: 250ms;
+  transition-property: visibility, opacity;
+
+  ${(props) =>
+    props.visible &&
+    css`
+      visibility: visible;
+      opacity: 0.7;
+    `}
 `;
 
 export const QuoteContent = styled.span`

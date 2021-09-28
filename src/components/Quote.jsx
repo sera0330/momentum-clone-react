@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import * as S from "./Quote.style";
 
 const Quote = () => {
+  const [copiedShow, setCopiedShow] = useState(false);
   const [quote, setQoute] = useState({
     content: "",
     author: "",
@@ -18,11 +19,29 @@ const Quote = () => {
       });
   }, []);
 
+  const handleClickQuote = () => {
+    navigator.clipboard.writeText(`"${quote.content}" - ${quote.author}`);
+    showCopied();
+  };
+
+  const showCopied = () => {
+    setCopiedShow(true);
+
+    setTimeout(() => {
+      setCopiedShow(false);
+    }, 2000);
+  };
+
   return (
-    <S.Quote>
-      <S.QuoteContent>"{quote.content}"</S.QuoteContent>
-      <S.QuoteAuthor>{quote.author}</S.QuoteAuthor>
-    </S.Quote>
+    <>
+      <S.Quote>
+        <S.QuoteCopied visible={copiedShow}>Copied!</S.QuoteCopied>
+        <div onClick={handleClickQuote} title={"Copy Quote"}>
+          <S.QuoteContent>"{quote.content}"</S.QuoteContent>
+          <S.QuoteAuthor>{quote.author}</S.QuoteAuthor>
+        </div>
+      </S.Quote>
+    </>
   );
 };
 

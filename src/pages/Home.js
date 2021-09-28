@@ -56,9 +56,9 @@ const Home = ({ user, setUser }) => {
           <S.BottomLeft>
             <ThemeToggle theme={theme} setTheme={setTheme} />
           </S.BottomLeft>
-          <S.Bottom>
+          <S.BottomCenter>
             <Quote />
-          </S.Bottom>
+          </S.BottomCenter>
           <S.BottomRight>
             <Todo />
           </S.BottomRight>

@@ -16,7 +16,7 @@ const Focus = ({ focus, setFocus, clearFocus }) => {
     // focus 체크박스 체크 여부
     localStorage.getItem(LS_FOCUS_CHECKED) ? true : false
   );
-  const [moreClicked, setMoreClicked] = useState(); // focus 우측의 more 버튼 클릭 여부. 클릭했을 때 dropdown 보이기 위함
+  const [moreClicked, setMoreClicked] = useState(false); // focus 우측의 more 버튼 클릭 여부. 클릭했을 때 dropdown 보이기 위함
   const moreContainerRef = useRef(); // more 버튼 영역 컨테이너
 
   // focus가 체크됐을 때는 hover 상태가 아니어도 체크박스가 보이도록
@@ -82,11 +82,12 @@ const Focus = ({ focus, setFocus, clearFocus }) => {
               <S.OpacitySpan
                 onClick={handleClickMore}
                 display={moreClicked ? DISPLAY_FLEX : DISPLAY_NONE}
+                title="More"
               >
                 <CgMoreAlt />
               </S.OpacitySpan>
             </S.MoreIconWrapper>
-            <S.Dropdown display={moreClicked ? DISPLAY_FLEX : DISPLAY_NONE}>
+            <S.Dropdown visible={moreClicked}>
               <S.Ul>
                 <S.Li>
                   {checked ? (
