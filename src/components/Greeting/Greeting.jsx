@@ -1,8 +1,8 @@
 import React from "react";
-import Span from "./Span";
-import { MSG_ASK_LOGOUT } from "../constants/message";
+import Span from "../Common/Span";
+import { MSG_ASK_LOGOUT } from "../../constants/message";
 
-const Greeting = ({ user, setUser, clearFocus }) => {
+const Greeting = ({ user, setUser }) => {
   const handleGreetingClick = () => {
     if (window.confirm(MSG_ASK_LOGOUT)) {
       logout();
@@ -10,7 +10,6 @@ const Greeting = ({ user, setUser, clearFocus }) => {
   };
 
   const logout = () => {
-    clearFocus();
     setUser("");
     localStorage.clear();
   };

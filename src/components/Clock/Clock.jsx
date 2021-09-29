@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Span from "./Span";
+import Span from "../Common/Span";
 
 const Clock = () => {
   const [clock, setClock] = useState("");

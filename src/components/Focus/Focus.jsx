@@ -1,21 +1,23 @@
 import React, { useRef, useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import * as S from "./Focus.style";
 import FocusDropdownItem from "./FocusDropdownItem";
-import { ROLE_ADD, ROLE_CLEAR, ROLE_EDIT } from "../constants/etc";
+import { ROLE_ADD, ROLE_CLEAR, ROLE_EDIT } from "../../constants/etc";
 import {
   LS_FOCUS_CHECKED,
   CHECKED_TRUE,
   CHECKED_FALSE,
-} from "../constants/localStorage";
-import { DISPLAY_FLEX, DISPLAY_NONE } from "../constants/css";
+} from "../../constants/localStorage";
+import { DISPLAY_FLEX, DISPLAY_NONE } from "../../constants/css";
 import { CgMoreAlt } from "react-icons/cg";
 import { IoMdCheckboxOutline, IoMdSquareOutline } from "react-icons/io";
 
-const Focus = ({ focus, setFocus, clearFocus }) => {
+const Focus = () => {
+  const focus = useSelector((state) => state.focus.value);
+
   const [checked, setChecked] = useState(
-    // focus 체크박스 체크 여부
     localStorage.getItem(LS_FOCUS_CHECKED) ? true : false
-  );
+  ); // focus 체크박스 체크 여부
   const [moreClicked, setMoreClicked] = useState(false); // focus 우측의 more 버튼 클릭 여부. 클릭했을 때 dropdown 보이기 위함
   const moreContainerRef = useRef(); // more 버튼 영역 컨테이너
 
@@ -91,25 +93,13 @@ const Focus = ({ focus, setFocus, clearFocus }) => {
               <S.Ul>
                 <S.Li>
                   {checked ? (
-                    <FocusDropdownItem
-                      role={ROLE_ADD}
-                      setFocus={setFocus}
-                      clearFocus={clearFocus}
-                    />
+                    <FocusDropdownItem role={ROLE_ADD} />
                   ) : (
-                    <FocusDropdownItem
-                      role={ROLE_EDIT}
-                      setFocus={setFocus}
-                      clearFocus={clearFocus}
-                    />
+                    <FocusDropdownItem role={ROLE_EDIT} />
                   )}
                 </S.Li>
                 <S.Li>
-                  <FocusDropdownItem
-                    role={ROLE_CLEAR}
-                    setFocus={setFocus}
-                    clearFocus={clearFocus}
-                  />
+                  <FocusDropdownItem role={ROLE_CLEAR} />
                 </S.Li>
               </S.Ul>
             </S.Dropdown>

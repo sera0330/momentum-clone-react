@@ -4,7 +4,7 @@ export const BackgroundImgae = styled.div`
   margin: 0;
   padding: 0;
   z-index: -1;
-  transition: transform 0.3s ease-out;
+  // transition: transform 0.3s ease-out;
   position: absolute;
   top: 0;
   left: 0;
@@ -27,6 +27,6 @@ export const BackgroundOverlay = styled.div`
   z-index: 2;
   background-image: url(${(props) => props.url});
   background-size: 100% 100%;
-  opacity: 1;
-  transition: opacity 0.3s ease-out;
+  opacity: 0.5;
+  // transition: opacity 0.3s ease-out;
 `;

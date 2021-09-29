@@ -1,8 +1,8 @@
 import React from "react";
 import * as S from "./Intro.style";
-import Span from "../components/Span";
-import TextInput from "../components/TextInput";
-import Background from "../components/Background";
+import Span from "../components/Common/Span";
+import TextInput from "../components/Common/TextInput";
+import Background from "../components/Background/Background";
 import { LS_FOCUS, LS_USER, LS_THEME } from "../constants/localStorage";
 import { KEY_ENTER, THEME_LIGHT } from "../constants/etc";
 import { MSG_ASK_NAME } from "../constants/message";

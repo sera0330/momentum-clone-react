@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import * as S from "./Todo.style";
 import TodoItem from "./TodoItem";
-import { LS_TODO_LIST } from "../constants/localStorage";
-import { KEY_ENTER } from "../constants/etc";
+import { LS_TODO_LIST } from "../../constants/localStorage";
+import { KEY_ENTER } from "../../constants/etc";
 
 const Todo = () => {
   const [visible, setVisible] = useState(false);

@@ -1,24 +1,19 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { init } from "./focusSlice";
 import * as S from "./Focus.style";
-import Span from "./Span";
-import TextInput from "./TextInput";
-import { MSG_ASK_FOCUS } from "../constants/message";
-import {
-  LS_FOCUS,
-  LS_FOCUS_CHECKED,
-  CHECKED_FALSE,
-} from "../constants/localStorage";
+import Span from "../Common/Span";
+import TextInput from "../Common/TextInput";
+import { MSG_ASK_FOCUS } from "../../constants/message";
+import { LS_FOCUS } from "../../constants/localStorage";
 
-const FocusAsk = ({ setFocus }) => {
+const FocusAsk = () => {
+  const dispatch = useDispatch();
+
   const handleEnterKeyPress = (event) => {
     if (event.key === "Enter") {
-      initFocus(event.target.value);
+      dispatch(init(event.target.value));
     }
-  };
-
-  const initFocus = (input) => {
-    setFocus(input);
-    localStorage.setItem(LS_FOCUS_CHECKED, CHECKED_FALSE);
   };
 
   return (

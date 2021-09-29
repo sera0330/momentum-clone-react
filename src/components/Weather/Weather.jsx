@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import * as S from "./Weather.style";
-import { API_WEATHER } from "../constants/apiKey";
-import { LS_COORDS } from "../constants/localStorage";
+import { API_WEATHER } from "../../constants/apiKey";
+import { LS_COORDS } from "../../constants/localStorage";
 
 const Weather = () => {
   const [temperature, setTemperature] = useState("");

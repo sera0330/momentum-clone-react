@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import * as S from "./ThemeToggle.style";
+import * as S from "./ThemeToggleButton.style";
 import { FaToggleOn, FaToggleOff } from "react-icons/fa";
-import { THEME_DARK, THEME_LIGHT } from "../constants/etc";
-import { LS_THEME } from "../constants/localStorage";
+import { THEME_DARK, THEME_LIGHT } from "../../constants/etc";
+import { LS_THEME } from "../../constants/localStorage";
 
 const Theme = ({ theme, setTheme }) => {
   useEffect(() => {
