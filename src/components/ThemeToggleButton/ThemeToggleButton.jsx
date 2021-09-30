@@ -1,20 +1,16 @@
-import React, { useEffect } from "react";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { toggle } from "./themeSlice";
 import * as S from "./ThemeToggleButton.style";
 import { FaToggleOn, FaToggleOff } from "react-icons/fa";
-import { THEME_DARK, THEME_LIGHT } from "../../constants/etc";
-import { LS_THEME } from "../../constants/localStorage";
+import { THEME_LIGHT } from "../../constants/etc";
 
-const Theme = ({ theme, setTheme }) => {
-  useEffect(() => {
-    localStorage.setItem(LS_THEME, theme);
-  }, [theme]);
+const Theme = () => {
+  const theme = useSelector((state) => state.theme.value);
+  const dispatch = useDispatch();
 
   const handleClickToggle = () => {
-    if (theme === THEME_LIGHT) {
-      setTheme(THEME_DARK);
-    } else {
-      setTheme(THEME_LIGHT);
-    }
+    dispatch(toggle());
   };
 
   return (

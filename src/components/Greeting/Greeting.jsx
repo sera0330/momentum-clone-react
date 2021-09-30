@@ -1,8 +1,13 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { clear } from "../UserForm/userSlice";
 import Span from "../Common/Span";
 import { MSG_ASK_LOGOUT } from "../../constants/message";
 
-const Greeting = ({ user, setUser }) => {
+const Greeting = () => {
+  const user = useSelector((state) => state.user.value);
+  const dispatch = useDispatch();
+
   const handleGreetingClick = () => {
     if (window.confirm(MSG_ASK_LOGOUT)) {
       logout();
@@ -10,8 +15,7 @@ const Greeting = ({ user, setUser }) => {
   };
 
   const logout = () => {
-    setUser("");
-    localStorage.clear();
+    dispatch(clear());
   };
 
   return (

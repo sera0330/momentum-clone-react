@@ -1,20 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
+import { useSelector } from "react-redux";
 import Intro from "./pages/Intro";
 import Home from "./pages/Home";
 import GlobalStyle from "./styles/GlobalStyle";
-import { LS_USER } from "./constants/localStorage";
 
 function App() {
-  const [user, setUser] = useState(localStorage.getItem(LS_USER));
+  const user = useSelector((state) => state.user.value);
 
   return (
     <>
       <GlobalStyle />
-      {user ? (
-        <Home user={user} setUser={setUser} />
-      ) : (
-        <Intro setUser={setUser} />
-      )}
+      {user ? <Home /> : <Intro />}
     </>
   );
 }
