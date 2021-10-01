@@ -5,7 +5,9 @@
 
 
 ## 사용된 기술
+* JavaScript ES6
 * React.js
+* Redux Toolkit
 * styled-component
 
 ## 기능
@@ -35,4 +37,4 @@
 
 ### 테마
 * 테마 토글 버튼 클릭 시, Light Mode/Dark Mode로 테마가 전환됩니다.
-* 테마는 드롭다운에 적용되어 있습니다.
+* 테마는 드롭다운에 적용됩니다.
