@@ -5,7 +5,7 @@ import Home from "./pages/Home";
 import GlobalStyle from "./styles/GlobalStyle";
 
 function App() {
-  const user = useSelector((state) => state.user.value);
+  const user = useSelector((state) => state.user);
 
   return (
     <>

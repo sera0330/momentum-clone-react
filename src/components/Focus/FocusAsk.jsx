@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { init } from "./focusSlice";
+import { setFocus } from "./focusSlice";
 import * as S from "./Focus.style";
 import Span from "../Common/Span";
 import TextInput from "../Common/TextInput";
@@ -12,7 +12,7 @@ const FocusAsk = () => {
 
   const handleEnterKeyPress = (event) => {
     if (event.key === "Enter") {
-      dispatch(init(event.target.value));
+      dispatch(setFocus(event.target.value));
     }
   };
 

@@ -13,7 +13,7 @@ import { CgMoreAlt } from "react-icons/cg";
 import { IoMdCheckboxOutline, IoMdSquareOutline } from "react-icons/io";
 
 const TodayFocus = () => {
-  const focus = useSelector((state) => state.focus.value);
+  const focus = useSelector((state) => state.focus);
 
   const [checked, setChecked] = useState(
     localStorage.getItem(LS_FOCUS_CHECKED) ? true : false

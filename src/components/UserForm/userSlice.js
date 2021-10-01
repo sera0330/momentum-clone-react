@@ -1,26 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { THEME_LIGHT } from "../../constants/etc";
-import { LS_USER, LS_FOCUS, LS_THEME } from "../../constants/localStorage";
+import { loadState } from "../../common/localStorage";
+
+const initialState = loadState().user === undefined ? "" : loadState().user;
 
 export const userSlice = createSlice({
   name: "user",
-  initialState: {
-    value: localStorage.getItem(LS_USER),
-  },
+  initialState: initialState,
   reducers: {
-    init: (state, action) => {
-      state.value = action.payload;
-      localStorage.setItem(LS_USER, action.payload);
-      localStorage.setItem(LS_FOCUS, "");
-      localStorage.setItem(LS_THEME, THEME_LIGHT);
-    },
-    clear: (state) => {
-      state.value = "";
-      localStorage.clear();
-    },
+    setUser: (state, action) => action.payload,
+    clearUser: (state) => "",
   },
 });
 
-export const { init, clear } = userSlice.actions;
+export const { setUser, clearUser } = userSlice.actions;
 
 export default userSlice.reducer;

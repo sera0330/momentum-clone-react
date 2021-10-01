@@ -1,10 +1,10 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import TodayFocus from "./TodayFocus";
 import FocusAsk from "./FocusAsk";
 
 const Focus = () => {
-  const focus = useSelector((state) => state.focus.value);
+  const focus = useSelector((state) => state.focus);
 
   return <>{focus ? <TodayFocus /> : <FocusAsk />}</>;
 };

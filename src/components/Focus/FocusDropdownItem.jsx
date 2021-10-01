@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { clear, editMode } from "./focusSlice";
+import { clearFocus, editModeFocus } from "./focusSlice";
 import * as S from "./Focus.style";
 import { ROLE_ADD, ROLE_CLEAR, ROLE_EDIT } from "../../constants/etc";
 import { CgClose, CgMathPlus } from "react-icons/cg";
@@ -14,11 +14,11 @@ const FocusDropdownItem = ({ role }) => {
   const dispatch = useDispatch();
 
   const handleClickClear = () => {
-    dispatch(clear());
+    dispatch(clearFocus());
   };
 
   const handleClickEdit = () => {
-    dispatch(editMode());
+    dispatch(editModeFocus());
   };
 
   let icon, label;

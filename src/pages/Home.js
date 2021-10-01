@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { ThemeProvider } from "styled-components";
 import { lightMode, darkMode } from "../styles/theme";
 import * as S from "./Home.style";
@@ -15,7 +15,7 @@ import { URL_RANDOM_BACKGROUND } from "../constants/url";
 import { THEME_LIGHT } from "../constants/etc";
 
 const Home = () => {
-  const theme = useSelector((state) => state.theme.value);
+  const theme = useSelector((state) => state.theme);
 
   return (
     <ThemeProvider theme={theme === THEME_LIGHT ? lightMode : darkMode}>

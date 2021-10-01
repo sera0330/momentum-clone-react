@@ -1,18 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { addTodo } from "./todosSlice";
 import * as S from "./Todo.style";
 import TodoItem from "./TodoItem";
-import { LS_TODO_LIST } from "../../constants/localStorage";
 import { KEY_ENTER } from "../../constants/etc";
 
 const Todo = () => {
+  const dispatch = useDispatch();
+  const todos = useSelector((state) => state.todos);
+
   const [visible, setVisible] = useState(false);
-
-  const savedTodoList = JSON.parse(localStorage.getItem(LS_TODO_LIST));
-  const [todoList, setTodoList] = useState(savedTodoList || []);
-
-  useEffect(() => {
-    localStorage.setItem(LS_TODO_LIST, JSON.stringify(todoList));
-  }, [todoList]);
 
   const handleClickTodoToggle = () => {
     setVisible(!visible);
@@ -26,13 +23,7 @@ const Todo = () => {
   };
 
   const addNewTodo = (todo) => {
-    const todoObj = {
-      value: todo,
-      checked: false,
-      editable: false,
-    };
-
-    setTodoList([...todoList, todoObj]);
+    dispatch(addTodo(todo));
   };
 
   return (
@@ -45,14 +36,9 @@ const Todo = () => {
             </S.HeaderTitleWrapper>
           </S.TodoHeader>
           <S.Ol>
-            {todoList.map((todo, index) => (
+            {todos.map((todo, index) => (
               <S.Li key={index}>
-                <TodoItem
-                  todoItem={todo}
-                  itemIndex={index}
-                  todoList={todoList}
-                  setTodoList={setTodoList}
-                />
+                <TodoItem todoItem={todo} itemIndex={index} />
               </S.Li>
             ))}
           </S.Ol>

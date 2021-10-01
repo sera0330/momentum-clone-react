@@ -1,53 +1,46 @@
 import React, { useRef } from "react";
+import { useDispatch } from "react-redux";
+import { editModeTodo, updateTodo, removeTodo, checkTodo } from "./todosSlice";
 import * as S from "./TodoItem.style";
 import { KEY_ENTER } from "../../constants/etc";
 import { IoMdCheckboxOutline, IoMdSquareOutline } from "react-icons/io";
 import { CgClose } from "react-icons/cg";
 import { RiPencilFill } from "react-icons/ri";
 
-const TodoItem = ({ todoItem, itemIndex, todoList, setTodoList }) => {
+const TodoItem = ({ todoItem, itemIndex }) => {
+  const dispatch = useDispatch();
   const todoTitleRef = useRef();
 
-  const handleCheckTodo = (changedIndex) => {
-    setTodoList(
-      todoList.map((todo, index) =>
-        index === changedIndex ? { ...todo, checked: !todo.checked } : todo
-      )
-    );
+  const handleCheckTodo = (index) => {
+    dispatch(checkTodo(index));
   };
 
-  const handelClickEdit = (editableIndex) => {
-    // edit 모드로 전환
-    setTodoList(
-      todoList.map((todo, index) =>
-        index === editableIndex ? { ...todo, editable: true } : todo
-      )
-    );
+  const handelClickEdit = (index) => {
+    dispatch(editModeTodo(index));
   };
 
-  const handleEnterEdit = (event, editedIndex) => {
+  const handleEnterEdit = (event, index) => {
     if (event.key === KEY_ENTER) {
       event.preventDefault();
-      updateTodo(event, editedIndex);
+      editTodo(event, index);
     }
   };
 
-  const handleBlurEdit = (event, editedIndex) => {
-    updateTodo(event, editedIndex);
+  const handleBlurEdit = (event, index) => {
+    editTodo(event, index);
   };
 
-  const updateTodo = (event, editedIndex) => {
-    setTodoList(
-      todoList.map((todo, index) =>
-        index === editedIndex
-          ? { ...todo, value: event.target.innerHTML, editable: false }
-          : todo
-      )
-    );
+  const editTodo = (event, index) => {
+    const todoObj = {
+      index: index,
+      value: event.target.innerHTML,
+    };
+
+    dispatch(updateTodo(todoObj));
   };
 
-  const handelClickDelete = (clickedIndex) => {
-    setTodoList(todoList.filter((todo, index) => index !== clickedIndex));
+  const handelClickRemove = (index) => {
+    dispatch(removeTodo(index));
   };
 
   return (
@@ -75,7 +68,7 @@ const TodoItem = ({ todoItem, itemIndex, todoList, setTodoList }) => {
           <RiPencilFill />
         </S.IconWrapper>
         <S.IconWrapper
-          onClick={() => handelClickDelete(itemIndex)}
+          onClick={() => handelClickRemove(itemIndex)}
           title="Delete"
         >
           <CgClose />

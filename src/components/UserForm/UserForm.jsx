@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { init } from "./userSlice";
+import { setUser } from "./userSlice";
 import * as S from "./UserForm.style";
 import Span from "../Common/Span";
 import TextInput from "../Common/TextInput";
@@ -12,12 +12,8 @@ const UserForm = () => {
 
   const handleKeyPress = (event) => {
     if (event.key === KEY_ENTER) {
-      registerUser(event.target.value);
+      dispatch(setUser(event.target.value));
     }
-  };
-
-  const registerUser = (user) => {
-    dispatch(init(user));
   };
 
   return (

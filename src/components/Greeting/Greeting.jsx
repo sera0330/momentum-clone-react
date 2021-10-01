@@ -1,11 +1,14 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { clear } from "../UserForm/userSlice";
+import { clearUser } from "../UserForm/userSlice";
+import { clearTodos } from "../Todo/todosSlice";
 import Span from "../Common/Span";
 import { MSG_ASK_LOGOUT } from "../../constants/message";
+import { clearFocus } from "../Focus/focusSlice";
+import { clearTheme } from "../ThemeToggleButton/themeSlice";
 
 const Greeting = () => {
-  const user = useSelector((state) => state.user.value);
+  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const handleGreetingClick = () => {
@@ -15,7 +18,10 @@ const Greeting = () => {
   };
 
   const logout = () => {
-    dispatch(clear());
+    dispatch(clearUser());
+    dispatch(clearFocus());
+    dispatch(clearTheme());
+    dispatch(clearTodos());
   };
 
   return (
