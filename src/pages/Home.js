@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { ThemeProvider } from "styled-components";
 import { lightMode, darkMode } from "../styles/theme";
 import * as S from "./Home.style";

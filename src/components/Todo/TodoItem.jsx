@@ -19,7 +19,7 @@ const TodoItem = ({ todoItem, itemIndex }) => {
     dispatch(editModeTodo(index));
   };
 
-  const handleEnterEdit = (event, index) => {
+  const handleKeyPressEnter = (event, index) => {
     if (event.key === KEY_ENTER) {
       event.preventDefault();
       editTodo(event, index);
@@ -57,7 +57,7 @@ const TodoItem = ({ todoItem, itemIndex }) => {
       <S.TodoTitle
         isChecked={todoItem.checked}
         editable={todoItem.editable}
-        onKeyPress={(event) => handleEnterEdit(event, itemIndex)}
+        onKeyPress={(event) => handleKeyPressEnter(event, itemIndex)}
         onBlur={(event) => handleBlurEdit(event, itemIndex)}
         ref={todoTitleRef}
       >
@@ -69,7 +69,7 @@ const TodoItem = ({ todoItem, itemIndex }) => {
         </S.IconWrapper>
         <S.IconWrapper
           onClick={() => handelClickRemove(itemIndex)}
-          title="Delete"
+          title="Remove"
         >
           <CgClose />
         </S.IconWrapper>

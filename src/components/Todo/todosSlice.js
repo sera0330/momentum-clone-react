@@ -17,33 +17,45 @@ export const todosSlice = createSlice({
       state.push(todoObj);
     },
     checkTodo: (state, action) => {
-      const changedIndex = action.payload;
+      const index = action.payload;
 
-      state.map((todo, index) =>
-        index === changedIndex ? { ...todo, checked: !todo.checked } : todo
-      );
+      return state.map((todo, i) => {
+        if (i !== index) return todo;
+
+        return {
+          ...todo,
+          checked: !todo.checked,
+        };
+      });
     },
     editModeTodo: (state, action) => {
-      const editableIndex = action.payload;
+      const index = action.payload;
 
-      state.map((todo, index) =>
-        index === editableIndex ? { ...todo, editable: true } : todo
-      );
+      return state.map((todo, i) => {
+        if (i !== index) return todo;
+
+        return {
+          ...todo,
+          editable: true,
+        };
+      });
     },
     updateTodo: (state, action) => {
-      const editedIndex = action.payload.index;
-      const editedValue = action.payload.value;
+      const index = action.payload.index;
+      const value = action.payload.value;
 
-      state.map((todo, index) =>
-        index === editedIndex
-          ? { ...todo, value: editedValue, editable: false }
-          : todo
-      );
+      return state.map((todo, i) => {
+        if (i !== index) return todo;
+
+        return {
+          ...todo,
+          value: value,
+          editable: false,
+        };
+      });
     },
     removeTodo: (state, action) => {
-      const clickedIndex = action.payload;
-
-      state.filter((todo, index) => index !== clickedIndex);
+      return state.filter((todo, i) => i !== action.payload);
     },
     clearTodos: (state) => (state = []),
   },
