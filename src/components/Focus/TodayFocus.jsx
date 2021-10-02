@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { checkFocus } from "./focusSlice";
 import * as S from "./Focus.style";
 import FocusDropdownItem from "./FocusDropdownItem";
 import { ROLE_ADD, ROLE_CLEAR, ROLE_EDIT } from "../../constants/etc";
@@ -14,6 +15,7 @@ import { IoMdCheckboxOutline, IoMdSquareOutline } from "react-icons/io";
 
 const TodayFocus = () => {
   const focus = useSelector((state) => state.focus);
+  const dispatch = useDispatch();
 
   const [checked, setChecked] = useState(
     localStorage.getItem(LS_FOCUS_CHECKED) ? true : false
@@ -31,6 +33,7 @@ const TodayFocus = () => {
 
   const handleClickCheckbox = () => {
     setChecked(!checked);
+    dispatch(checkFocus());
   };
 
   const handleClickMore = () => {
@@ -70,13 +73,13 @@ const TodayFocus = () => {
         <S.SideDiv side="left">
           <S.OpacitySpan
             onClick={handleClickCheckbox}
-            display={checked ? DISPLAY_FLEX : DISPLAY_NONE}
+            display={focus.checked ? DISPLAY_FLEX : DISPLAY_NONE}
           >
-            {checked ? <IoMdCheckboxOutline /> : <IoMdSquareOutline />}
+            {focus.checked ? <IoMdCheckboxOutline /> : <IoMdSquareOutline />}
           </S.OpacitySpan>
         </S.SideDiv>
-        <S.FocusText size="170%" weight="400" checked={checked}>
-          {focus}
+        <S.FocusText size="170%" weight="400" checked={focus.checked}>
+          {focus.value}
         </S.FocusText>
         <S.SideDiv side="right">
           <S.MoreContainer ref={moreContainerRef}>
@@ -92,7 +95,7 @@ const TodayFocus = () => {
             <S.Dropdown visible={moreClicked}>
               <S.Ul>
                 <S.Li>
-                  {checked ? (
+                  {focus.checked ? (
                     <FocusDropdownItem role={ROLE_ADD} />
                   ) : (
                     <FocusDropdownItem role={ROLE_EDIT} />

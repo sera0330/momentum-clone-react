@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { loadState } from "../../common/localStorage";
 
-const initialState = loadState().user === undefined ? "" : loadState().user;
+const initialState = "";
 
 export const userSlice = createSlice({
   name: "user",

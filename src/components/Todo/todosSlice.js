@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { loadState } from "../../common/localStorage";
 
-const initialState = loadState().todos === undefined ? [] : loadState().todos;
+const initialState = [];
 
 export const todosSlice = createSlice({
   name: "todos",

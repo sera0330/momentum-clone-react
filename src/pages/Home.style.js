@@ -13,7 +13,6 @@ export const HomeContainer = styled.div`
 
 export const Header = styled.div`
   display: flex;
-  // justify-content: space-between;
   justify-content: flex-end;
 `;
 
@@ -61,6 +60,5 @@ export const BottomRight = styled.div`
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
-  // flex: 0 0 var(--bottom-side-width);
   flex: 0 0 188px;
 `;
