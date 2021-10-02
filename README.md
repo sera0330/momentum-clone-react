@@ -8,6 +8,7 @@
 * JavaScript ES6
 * React.js
 * Redux Toolkit
+* redux-persist
 * styled-component
 
 ## 기능
