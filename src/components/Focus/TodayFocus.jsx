@@ -4,11 +4,6 @@ import { checkFocus } from "./focusSlice";
 import * as S from "./Focus.style";
 import FocusDropdownItem from "./FocusDropdownItem";
 import { ROLE_ADD, ROLE_CLEAR, ROLE_EDIT } from "../../constants/etc";
-import {
-  LS_FOCUS_CHECKED,
-  CHECKED_TRUE,
-  CHECKED_FALSE,
-} from "../../constants/localStorage";
 import { DISPLAY_FLEX, DISPLAY_NONE } from "../../constants/css";
 import { CgMoreAlt } from "react-icons/cg";
 import { IoMdCheckboxOutline, IoMdSquareOutline } from "react-icons/io";
@@ -17,22 +12,10 @@ const TodayFocus = () => {
   const focus = useSelector((state) => state.focus);
   const dispatch = useDispatch();
 
-  const [checked, setChecked] = useState(
-    localStorage.getItem(LS_FOCUS_CHECKED) ? true : false
-  ); // focus 체크박스 체크 여부
   const [moreClicked, setMoreClicked] = useState(false); // focus 우측의 more 버튼 클릭 여부. 클릭했을 때 dropdown 보이기 위함
   const moreContainerRef = useRef(); // more 버튼 영역 컨테이너
 
-  // focus가 체크됐을 때는 hover 상태가 아니어도 체크박스가 보이도록
-  useEffect(() => {
-    localStorage.setItem(
-      LS_FOCUS_CHECKED,
-      checked ? CHECKED_TRUE : CHECKED_FALSE
-    );
-  }, [checked]);
-
   const handleClickCheckbox = () => {
-    setChecked(!checked);
     dispatch(checkFocus());
   };
 
