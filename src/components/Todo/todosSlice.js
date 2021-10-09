@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { v4 as uuidv4 } from "uuid";
 
 const initialState = [];
 
@@ -8,6 +9,7 @@ export const todosSlice = createSlice({
   reducers: {
     addTodo: (state, action) => {
       const todoObj = {
+        id: uuidv4(),
         value: action.payload,
         checked: false,
         editable: false,
@@ -16,45 +18,26 @@ export const todosSlice = createSlice({
       state.push(todoObj);
     },
     checkTodo: (state, action) => {
-      const index = action.payload;
+      const index = state.findIndex((state) => state.id === action.payload);
 
-      return state.map((todo, i) => {
-        if (i !== index) return todo;
-
-        return {
-          ...todo,
-          checked: !todo.checked,
-        };
-      });
+      state[index].checked = !state[index].checked;
     },
     editModeTodo: (state, action) => {
-      const index = action.payload;
+      const index = state.findIndex((state) => state.id === action.payload);
 
-      return state.map((todo, i) => {
-        if (i !== index) return todo;
-
-        return {
-          ...todo,
-          editable: true,
-        };
-      });
+      state[index].editable = true;
     },
     updateTodo: (state, action) => {
-      const index = action.payload.index;
+      const index = state.findIndex((state) => state.id === action.payload.id);
       const value = action.payload.value;
 
-      return state.map((todo, i) => {
-        if (i !== index) return todo;
-
-        return {
-          ...todo,
-          value: value,
-          editable: false,
-        };
-      });
+      state[index].value = value;
+      state[index].editable = false;
     },
     removeTodo: (state, action) => {
-      return state.filter((todo, i) => i !== action.payload);
+      const index = state.findIndex((state) => state.id === action.payload);
+
+      state.splice(index, 1);
     },
     clearTodos: (state) => (state = []),
   },

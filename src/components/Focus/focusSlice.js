@@ -7,32 +7,22 @@ export const focusSlice = createSlice({
   initialState: initialState,
   reducers: {
     setFocus: (state, action) => {
-      return {
-        ...state,
-        value: action.payload,
-        editable: false,
-      };
+      state.value = action.payload;
+      state.editable = false;
     },
     checkFocus: (state) => {
-      return {
-        ...state,
-        checked: !state.checked,
-      };
+      state.checked = !state.checked;
     },
     focusEditModeOn: (state) => {
-      return {
-        ...state,
-        editable: true,
-      };
+      state.editable = true;
     },
     focusEditModeOff: (state) => {
-      return {
-        ...state,
-        editable: false,
-      };
+      state.editable = false;
     },
     clearFocus: (state) => {
-      return initialState;
+      state.value = "";
+      state.checked = false;
+      state.editable = true;
     },
   },
 });

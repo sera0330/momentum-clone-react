@@ -7,40 +7,40 @@ import { IoMdCheckboxOutline, IoMdSquareOutline } from "react-icons/io";
 import { CgClose } from "react-icons/cg";
 import { RiPencilFill } from "react-icons/ri";
 
-const TodoItem = ({ todoItem, itemIndex }) => {
+const TodoItem = ({ todoItem }) => {
   const dispatch = useDispatch();
   const todoTitleRef = useRef();
 
-  const handleCheckTodo = (index) => {
-    dispatch(checkTodo(index));
+  const handleCheckTodo = (id) => {
+    dispatch(checkTodo(id));
   };
 
-  const handelClickEdit = (index) => {
-    dispatch(editModeTodo(index));
+  const handelClickEdit = (id) => {
+    dispatch(editModeTodo(id));
   };
 
-  const handleKeyPressEnter = (event, index) => {
+  const handleKeyPressEnter = (event, id) => {
     if (event.key === KEY_ENTER) {
       event.preventDefault();
-      editTodo(event, index);
+      editTodo(event, id);
     }
   };
 
-  const handleBlurEdit = (event, index) => {
-    editTodo(event, index);
+  const handleBlurEdit = (event, id) => {
+    editTodo(event, id);
   };
 
-  const editTodo = (event, index) => {
+  const editTodo = (event, id) => {
     const todoObj = {
-      index: index,
+      id: id,
       value: event.target.innerHTML,
     };
 
     dispatch(updateTodo(todoObj));
   };
 
-  const handelClickRemove = (index) => {
-    dispatch(removeTodo(index));
+  const handelClickRemove = (id) => {
+    dispatch(removeTodo(id));
   };
 
   return (
@@ -49,7 +49,7 @@ const TodoItem = ({ todoItem, itemIndex }) => {
         <S.TodoCheckboxWrapper>
           <S.TodoCheckbox
             defaultChecked={todoItem.checked}
-            onChange={() => handleCheckTodo(itemIndex)}
+            onChange={() => handleCheckTodo(todoItem.id)}
           />
           {todoItem.checked ? <IoMdCheckboxOutline /> : <IoMdSquareOutline />}
         </S.TodoCheckboxWrapper>
@@ -57,18 +57,21 @@ const TodoItem = ({ todoItem, itemIndex }) => {
       <S.TodoTitle
         isChecked={todoItem.checked}
         editable={todoItem.editable}
-        onKeyPress={(event) => handleKeyPressEnter(event, itemIndex)}
-        onBlur={(event) => handleBlurEdit(event, itemIndex)}
+        onKeyPress={(event) => handleKeyPressEnter(event, todoItem.id)}
+        onBlur={(event) => handleBlurEdit(event, todoItem.id)}
         ref={todoTitleRef}
       >
         {todoItem.value}
       </S.TodoTitle>
       <S.TodoControl>
-        <S.IconWrapper onClick={() => handelClickEdit(itemIndex)} title="Edit">
+        <S.IconWrapper
+          onClick={() => handelClickEdit(todoItem.id)}
+          title="Edit"
+        >
           <RiPencilFill />
         </S.IconWrapper>
         <S.IconWrapper
-          onClick={() => handelClickRemove(itemIndex)}
+          onClick={() => handelClickRemove(todoItem.id)}
           title="Remove"
         >
           <CgClose />

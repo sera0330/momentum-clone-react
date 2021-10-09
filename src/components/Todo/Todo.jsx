@@ -38,7 +38,7 @@ const Todo = () => {
           <S.Ol>
             {todos.map((todo, index) => (
               <S.Li key={index}>
-                <TodoItem todoItem={todo} itemIndex={index} />
+                <TodoItem todoItem={todo} />
               </S.Li>
             ))}
           </S.Ol>
