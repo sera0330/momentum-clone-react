@@ -7,9 +7,9 @@
 ## 사용된 기술
 * JavaScript ES6
 * React.js
-* Redux Toolkit
+* [Redux Toolkit](https://redux-toolkit.js.org/)
 * redux-persist
-* styled-component
+* [styled-components](https://styled-components.com/)
 
 ## 기능
 ### 사용자 등록/해제
