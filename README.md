@@ -31,8 +31,8 @@
 * More 버튼 클릭 시, 드롭다운이 나타납니다. Focus 수정, 초기화가 가능합니다.
 
 ### Todo
-![todo](https://user-images.githubusercontent.com/39563609/139578690-92c82238-8f2f-42d6-9cde-ad8cec23ea0d.GIF)
-* Todo 버튼 클릭 시, Todo 드롭다운이 나타납니다.
+![todo](https://user-images.githubusercontent.com/39563609/139586256-bf542e4b-9158-47d0-a390-0427a2bd9996.GIF)
+* Todo 버튼 클릭 시, Todo 툴팁이 나타납니다.
 * Todo를 등록, 수정, 삭제할 수 있습니다.
 
 ### 명언/배경화면
